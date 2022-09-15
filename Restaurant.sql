@@ -28,7 +28,6 @@ create table reservation(
     reservation_id int primary key not null,
     table_id int references tables(table_id),
     customer_id int references account(account_id),
-    food_id_list nvarchar(30), --bỏ food id vào 1 string cách nhau bởi dấu ','
     dateReservation datetime,
 )
 create table reservationDetail(
