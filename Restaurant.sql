@@ -6,7 +6,7 @@
 create table food(
     food_id int primary key not null,
     name nvarchar(30) not null,
-    price int check (price >0),
+    price float check (price >0),
     food_type nvarchar(30) not null
 )
 create table roles(
