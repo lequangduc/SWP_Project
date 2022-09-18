@@ -1,0 +1,18 @@
+  =>  Template Name    : Restoran - Bootstrap Restaurant Template
+
+  =>  Template Link    : https://htmlcodex.com/bootstrap-restaurant-template
+
+  =>  Template License : https://htmlcodex.com/license (or read the LICENSE.txt file)
+
+  =>  Template Author  : HTML Codex
+
+  =>  Author Website   : https://htmlcodex.com
+
+  =>  About HTML Codex : HTML Codex is one of the top creators and publishers of Free HTML templates, HTML landing pages, HTML email templates and HTML snippets in the world. Read more at ( https://htmlcodex.com/about-us )
+
+I. Requirement to run project : 
+1. Install jdbc 9.4.0 jre 16 
+    Git link : https://github.com/Microsoft/mssql-jdbc/releases/tag/v9.4.0
+2. 
+
+II. 
