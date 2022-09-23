@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import DAO.AccountDAO;
 import entity.Account;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,7 +64,17 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        Account a = null;
+        try {
+            a = new AccountDAO().getAccount(userName, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (a!=null) {
+            request.getRequestDispatcher("menu.html").forward(request, response);
+        }
     }
 
     /**
@@ -84,6 +96,11 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("AdminPage.jsp").forward(request, response);return;}
         ///
 
+        if(userName.isEmpty() || password.isEmpty()) {
+            request.setAttribute("LoginError","User name or Password is bank");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
         if(userName.isEmpty() || password.isEmpty()) {
             request.setAttribute("LoginError","User name or Password is bank");
             request.getRequestDispatcher("login.jsp").forward(request, response);

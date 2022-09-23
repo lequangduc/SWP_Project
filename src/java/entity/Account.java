@@ -18,6 +18,9 @@ public class Account {
     private int role_id;
     private String role;
 
+    public Account() {
+    }
+
     public Account(int account_id, String name, String phone, String email, String username, String password, int role_id) {
         this.account_id = account_id;
         this.name = name;
