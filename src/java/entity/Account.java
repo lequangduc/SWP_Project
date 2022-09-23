@@ -16,6 +16,7 @@ public class Account {
     private String username;
     private String password;
     private int role_id;
+    private String role;
 
     public Account(int account_id, String name, String phone, String email, String username, String password, int role_id) {
         this.account_id = account_id;
@@ -26,6 +27,24 @@ public class Account {
         this.password = password;
         this.role_id = role_id;
     }
+    
+    public Account(int account_id, String name, String phone, String email, String username, String password, String role) {
+        this.account_id = account_id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.role=role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 
     public int getAccount_id() {
         return account_id;
