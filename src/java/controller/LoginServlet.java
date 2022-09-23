@@ -6,6 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -14,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.AccountDAO;
 import entity.Account;
-import model.AccountList;
 
 /**
  *
@@ -78,26 +79,31 @@ public class LoginServlet extends HttpServlet {
         //get parameters from jsp
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        
-        AccountList list = new AccountList();
-        ArrayList<Account> accounts = list.accountsgetAccountList();;
-        
-        
         /// test account
         if(userName.equals("admin") && password.equals("admin")){
             request.getRequestDispatcher("AdminPage.jsp").forward(request, response);return;}
         ///
+
         if(userName.isEmpty() || password.isEmpty()) {
             request.setAttribute("LoginError","User name or Password is bank");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
+        }
+
+        AccountDAO list = new AccountDAO();
+        ArrayList<Account> accounts = new ArrayList<Account>();
+        try {
+            accounts = list.getListAccounts();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         for(int i = 0; i < accounts.size(); i++) {
             if(accounts.get(i).getUsername().equals(userName) && accounts.get(i).getPassword().equals(password)){
                 HttpSession session= request.getSession();
                 session.setAttribute("userLogin", accounts.get(i));
                 session.setAttribute("userRegister",accounts.get(i));
-                request.getRequestDispatcher("home-page.jsp").forward(request, response);
+                request.getRequestDispatcher("index.html").forward(request, response);
                 break;
             }
         }
