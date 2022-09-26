@@ -9,11 +9,11 @@ import DBContext.DBContext;
 import entity.Tables;
 
 public class TableDAO {
-    DBContext db = DBContext.getInstance();
+    
     public ArrayList<Tables> getTables() {
         ArrayList<Tables> tables = new ArrayList<>();
         try {
-            Connection conn = db.getConnection();
+            Connection conn = new DBContext().getConnection();
             String sql = "SELECT * FROM tables";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -32,7 +32,7 @@ public class TableDAO {
 
     public void createTable(int table_id, String status, int capacity) {
         try {
-            Connection conn = db.getConnection();
+            Connection conn = new DBContext().getConnection();
             String sql = "INSERT INTO tables VALUES(?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, table_id);
@@ -45,7 +45,7 @@ public class TableDAO {
     }
     public void updateTable(int table_id, String status, int capacity) {
         try {
-            Connection conn = db.getConnection();
+            Connection conn = new DBContext().getConnection();
             String sql = "UPDATE tables SET status = ?, capacity = ? WHERE table_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, status);
