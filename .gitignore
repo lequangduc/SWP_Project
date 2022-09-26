@@ -1,3 +1,5 @@
 build
 nbproject/private
 src/java/DBContext/DBContext.java
+/dist/
+.vscode
