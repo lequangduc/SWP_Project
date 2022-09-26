@@ -2,6 +2,10 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "f:\\NetBeans\\NetBeans-13\\netbeans\\lib\\servlet-api-3.0-alpha-1.jar",
+<<<<<<< HEAD
+        "d:\\JavaWebDevelopment\\apache-tomcat-9.0.63\\lib\\servlet-api.jar"
+=======
         "d:\\FPT\\FALL 2022\\SWP391\\servlet-api.jar"
+>>>>>>> 2bc1b319af9d63b3e7de61cfb4c0420668cc7e0c
     ]
 }
