@@ -58,6 +58,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
+    <%-- created style --%>
 </head>
 
 <body>
@@ -143,10 +144,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="LoginServlet" method="post">
+                            <form name="loginform" action="LoginServlet" method="post">
                                 <div class="form-group row">
                                     <label
-                                        for="DateTimes"
+                                        for=""
                                         class="col-12 col-md-4 col-form-label"
                                         >Username</label
                                     >
@@ -163,7 +164,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 </div>
                                 <div class="form-group row">
                                     <label
-                                        for="DateTimes"
+                                        for=""
                                         class="col-12 col-md-4 col-form-label"
                                         >Password</label
                                     >
@@ -187,6 +188,137 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                     <div class="offset-md-4 col-md-10">
                                         <button type="submit" class="btn btn-primary btn-sm ml-1">
                                             Login
+                                        </button>
+                                        <button type="button" id="register-btn" data-toggle="modal"
+                                           data-target="#registerModal" class="btn btn-secondary btn-sm ml">
+                                            Register
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="registerModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg" role="content">
+                    <!--Register Modal content-->
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Register</h3>
+
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form name="registerform" action="RegisterServlet" method="post" onSubmit="return validateRegisterForm(event);">
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-4 col-form-label"
+                                        >Username</label
+                                    >
+
+                                    <div class="col-12 col-md-3">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="userName"
+                                            name="userName"
+                                            placeholder="User name"
+                                            />
+                                        
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="unameErr">
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-4 col-form-label"
+                                        >Password</label
+                                    >
+
+                                    <div class="col-12 col-md-3">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="passwordErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-4 col-form-label"
+                                        >Email</label
+                                    >
+
+                                    <div class="col-12 col-md-3">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="email"
+                                            name="email"
+                                            placeholder="email"
+                                            />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-4 col-form-label"
+                                        >Phone</label
+                                    >
+
+                                    <div class="col-12 col-md-3">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="phone"
+                                            name="phone"
+                                            placeholder="phone"
+                                            />
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-4 col-form-label"
+                                        >Name</label
+                                    >
+
+                                    <div class="col-12 col-md-3">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            name="name"
+                                            placeholder="name"
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="nameErr">
+                                    </div>
+                                </div>
+
+                                <div class="form-row mt-4">
+                                    <div class="offset-md-4 col-md-10">
+                                        <button type="submit" class="btn btn-primary btn-sm ml-1">
+                                            Register
                                         </button>
                                     </div>
                                 </div>
@@ -1428,14 +1560,36 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         crossorigin="anonymous"
     ></script>
     <script type="text/javascript">
-        $(window).on('load', function () {
-          if(${LoginError!=null})
-            $('#loginModal').modal('show');
-        });
+                                $(window).on('load', function () {
+                                    if (${LoginError!=null})
+                                        $('#loginModal').modal('show');
+                                });
     </script>
+    <%-- <script>
+        function validateRegisterForm(event) {
+            event.preventDefault(); // this will prevent the submit event.
+            if (document.registerform.userName.value == "") {
+                alert("User Name can not be left blank");
+                document.registerform.userName.focus();
+                return false;
+            } else if (document.registerform.password.value == "") {
+                alert("Password can not be left blank");
+                document.registerform.password.focus();
+                return false;
+            } else if (document.registerform.name.value == "") {
+                alert("Name can not be left blank");
+                document.registerform.name.focus();
+                return false;
+            } else {
+                document.registerform.submit(); // fire submit event
+            }
+        }</script> --%>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <%-- created js --%>
+    <script src="js/main1.js"></script>
 
 
 
