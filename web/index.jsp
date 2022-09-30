@@ -1427,11 +1427,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
     ></script>
-<!--    <script type="text/javascript">
+    <script type="text/javascript">
         $(window).on('load', function () {
+          if(${LoginError!=null})
             $('#loginModal').modal('show');
         });
-    </script>-->
+    </script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
