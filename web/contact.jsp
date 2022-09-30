@@ -1,3 +1,10 @@
+<%-- 
+    Document   : contact
+    Created on : Sep 29, 2022, 8:35:16 PM
+    Author     : admin
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,19 +62,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Service</a>
-                        <a href="menu.html" class="nav-item nav-link">Menu</a>
+                        <a href="index.jsp" class="nav-item nav-link">Home</a>
+                        <a href="about.jsp" class="nav-item nav-link">About</a>
+                        <a href="service.jsp" class="nav-item nav-link">Service</a>
+                        <a href="menu.jsp" class="nav-item nav-link">Menu</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
-                                <a href="booking.html" class="dropdown-item">Booking</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="booking.jsp" class="dropdown-item">Booking</a>
+                                <a href="team.jsp" class="dropdown-item">Our Team</a>
+                                <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                        <a href="contact.jsp" class="nav-item nav-link active">Contact</a>
                     </div>
                     <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
                 </div>

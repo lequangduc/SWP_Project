@@ -48,7 +48,6 @@ public class Account {
         this.role = role;
     }
 
-
     public int getAccount_id() {
         return account_id;
     }
@@ -56,6 +55,9 @@ public class Account {
     public void setAccount_id(int account_id) {
         this.account_id = account_id;
     }
+
+
+    
 
     public String getName() {
         return name;

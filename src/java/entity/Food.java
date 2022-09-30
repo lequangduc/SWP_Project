@@ -12,14 +12,24 @@ public class Food {
     private int food_id;
     private String name;
     private float price;
-    private String food_type;
+    private int foodtype_id;
+    private String foodDescription;
+    private String foodImage;
+    public Food() {
+    }
 
-    public Food(int food_id, String name, float price, String food_type) {
+    public Food(int food_id, String name, float price, int foodtype_id, String foodDescription, String foodImage) {
         this.food_id = food_id;
         this.name = name;
         this.price = price;
-        this.food_type = food_type;
+        this.foodtype_id = foodtype_id;
+        this.foodDescription = foodDescription;
+        this.foodImage = foodImage;
     }
+
+    
+    
+    
 
     public int getFood_id() {
         return food_id;
@@ -45,12 +55,30 @@ public class Food {
         this.price = price;
     }
 
-    public String getFood_type() {
-        return food_type;
+    public int getFoodtype_id() {
+        return foodtype_id;
     }
 
-    public void setFood_type(String food_type) {
-        this.food_type = food_type;
+    public void setFoodtype_id(int foodtype_id) {
+        this.foodtype_id = foodtype_id;
     }
+
+    public String getFoodDescription() {
+        return foodDescription;
+    }
+
+    public void setFoodDescription(String foodDescription) {
+        this.foodDescription = foodDescription;
+    }
+
+    public String getFoodImage() {
+        return foodImage;
+    }
+
+    public void setFoodImage(String foodImage) {
+        this.foodImage = foodImage;
+    }
+
+    
     
 }

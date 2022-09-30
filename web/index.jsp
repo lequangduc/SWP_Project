@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : Sep 29, 2022, 8:38:12 PM
+    Author     : admin
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -91,10 +98,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0 pe-4">
-              <a href="index.html" class="nav-item nav-link active">Home</a>
-              <a href="about.html" class="nav-item nav-link">About</a>
-              <a href="service.html" class="nav-item nav-link">Service</a>
-              <a href="menu.html" class="nav-item nav-link">Menu</a>
+              <a href="index.jsp" class="nav-item nav-link active">Home</a>
+              <a href="about.jsp" class="nav-item nav-link">About</a>
+              <a href="service.jsp" class="nav-item nav-link">Service</a>
+              <a href="menu.jsp" class="nav-item nav-link">Menu</a>
               <div class="nav-item dropdown">
                 <a
                   href="#"
@@ -103,14 +110,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                   >Pages</a
                 >
                 <div class="dropdown-menu m-0">
-                  <a href="booking.html" class="dropdown-item">Booking</a>
-                  <a href="team.html" class="dropdown-item">Our Team</a>
-                  <a href="testimonial.html" class="dropdown-item"
+                  <a href="booking.jsp" class="dropdown-item">Booking</a>
+                  <a href="team.jsp" class="dropdown-item">Our Team</a>
+                  <a href="testimonial.jsp" class="dropdown-item"
                     >Testimonial</a
                   >
                 </div>
               </div>
-              <a href="contact.html" class="nav-item nav-link">Contact</a>
+              <a href="contact.jsp" class="nav-item nav-link">Contact</a>
             </div>
             <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
             <button class="btn">
@@ -1420,3 +1427,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <script src="js/main.js"></script>
   </body>
 </html>
+
