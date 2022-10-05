@@ -73,7 +73,7 @@ public class LoginServlet extends HttpServlet {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (a!=null) {
-            request.getRequestDispatcher("menu.html").forward(request, response);
+            request.getRequestDispatcher("menu.jsp").forward(request, response);
         }
     }
 

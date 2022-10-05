@@ -23,7 +23,7 @@ import entity.Account;
 public class AccountDAO implements Serializable {
 
     public Account getAccount(String username,String password) throws SQLException {
-        Account a = new Account();
+        Account a = null;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
