@@ -143,7 +143,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </button>
               </div>
               <div class="modal-body">
-                <form action="LoginServlet" method="get">
+                <form action="LoginServlet" method="post">
                   <div class="form-group row">
                     <label
                       for="DateTimes"

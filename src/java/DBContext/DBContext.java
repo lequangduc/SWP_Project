@@ -12,13 +12,13 @@ import java.sql.DriverManager;
  * @author admin
  */
 public class DBContext {
-    private final String servername = "localhost";
+    private final String servername = "LAPTOP-61ETP8DM";
 
     private final String dbName = "Restaurant";
     private final String portNumber = "1433";
     private final String instance = "";
     private final String userID = "sa";
-    private final String password = "123456";
+    private final String password = "123";
 
     public Connection getConnection() throws Exception {
         try {
