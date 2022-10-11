@@ -10,4 +10,5 @@ src/java/Context/DBContext.java
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 .vscode/settings.json
+**/.vscode/
 
