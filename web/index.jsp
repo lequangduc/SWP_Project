@@ -75,6 +75,84 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 >
                 <span class="sr-only">Loading...</span>
             </div>
+<<<<<<< HEAD
+=======
+            <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
+            <button class="btn">
+              <a
+                data-toggle="modal"
+                data-target="#loginModal"
+                class="nav-item nav-link"
+                ><i class="fa fa-user"></i> Login</a
+              >
+            </button>
+          </div>
+        </nav>
+        <div id="loginModal" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-lg" role="content">
+            <!--Login Modal content-->
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">Login</h3>
+
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+              <div class="modal-body">
+<<<<<<< HEAD
+                <form action="LoginServlet" method="POST">
+=======
+                <form action="LoginServlet" method="post">
+>>>>>>> 850fe24ffd73da0bddf30ab9b75cafd1599f8b1b
+                  <div class="form-group row">
+                    <label
+                      for="DateTimes"
+                      class="col-12 col-md-4 col-form-label"
+                      >Username</label
+                    >
+
+                    <div class="col-12 col-md-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="userName"
+                        name="userName"
+                        placeholder="User name"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="DateTimes"
+                      class="col-12 col-md-4 col-form-label"
+                      >Password</label
+                    >
+
+                    <div class="col-12 col-md-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-row mt-4">
+                    <div class="offset-md-4 col-md-10">
+                      <button type="submit" class="btn btn-primary btn-sm ml-1">
+                        Login
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+>>>>>>> origin/quanghuy_addfile
         </div>
         <!-- Spinner End -->
 
@@ -1559,6 +1637,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
     ></script>
+<<<<<<< HEAD
     <script type="text/javascript">
                                 $(window).on('load', function () {
                                     if (${LoginError!=null})
@@ -1585,6 +1664,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             }
         }</script> --%>
 
+=======
+       <script type="text/javascript">
+        $(window).on('load', function () {
+          if(${LoginError!=null})
+            $('#loginModal').modal('show');
+        });
+    </script>
+>>>>>>> origin/quanghuy_addfile
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 

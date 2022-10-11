@@ -1,5 +1,14 @@
+
 build
 nbproject/private
 src/java/Context/DBContext.java
-.vscode/settings.json
 /dist/
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.vscode/settings.json
+**/.vscode/
