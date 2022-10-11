@@ -65,11 +65,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        
-=======
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         Account a = null;
@@ -81,8 +76,6 @@ public class LoginServlet extends HttpServlet {
         if (a != null) {
             request.getRequestDispatcher("menu.jsp").forward(request, response);
         }
->>>>>>> 850fe24ffd73da0bddf30ab9b75cafd1599f8b1b
->>>>>>> origin/quanghuy_addfile
     }
 
     /**
@@ -96,39 +89,20 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-         //get parameters from jsp
-        String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
-        /// test account
-        if(userName.equals("admin") && password.equals("admin")){
-            request.getRequestDispatcher("AdminPage/index.jsp").forward(request, response);return;}
-        ///
-
-        if(userName.isEmpty() || password.isEmpty()) {
-            request.setAttribute("LoginError","User name or Password is blank");
-<<<<<<< HEAD
-=======
-=======
         // get parameters from jsp
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
+
+        // get parameters from jsp
+
         /// test account
         if (userName.equals("admin") && password.equals("admin")) {
             request.getRequestDispatcher("AdminPage/index.jsp").forward(request, response);
             return;
         }
         ///
-
         if (userName.isEmpty() || password.isEmpty()) {
             request.setAttribute("LoginError", "User name or Password is bank");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
-        }
-        if (userName.isEmpty() || password.isEmpty()) {
-            request.setAttribute("LoginError", "User name or Password is bank");
->>>>>>> 850fe24ffd73da0bddf30ab9b75cafd1599f8b1b
->>>>>>> origin/quanghuy_addfile
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
         }
@@ -145,24 +119,13 @@ public class LoginServlet extends HttpServlet {
             if (accounts.get(i).getUsername().equals(userName) && accounts.get(i).getPassword().equals(password)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("userLogin", accounts.get(i));
-<<<<<<< HEAD
-                session.setAttribute("userRegister",accounts.get(i));
-<<<<<<< HEAD
-=======
-=======
                 session.setAttribute("userRegister", accounts.get(i));
->>>>>>> 850fe24ffd73da0bddf30ab9b75cafd1599f8b1b
->>>>>>> origin/quanghuy_addfile
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
             }
         }
-        request.setAttribute("LoginError","Login failed");
+        request.setAttribute("LoginError", "Login failed");
         request.getRequestDispatcher("index.jsp").forward(request, response);
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/quanghuy_addfile
     }
 
     /**

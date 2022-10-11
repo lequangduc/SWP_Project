@@ -75,8 +75,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 >
                 <span class="sr-only">Loading...</span>
             </div>
-<<<<<<< HEAD
-=======
             <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
             <button class="btn">
               <a
@@ -101,11 +99,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </button>
               </div>
               <div class="modal-body">
-<<<<<<< HEAD
-                <form action="LoginServlet" method="POST">
-=======
                 <form action="LoginServlet" method="post">
->>>>>>> 850fe24ffd73da0bddf30ab9b75cafd1599f8b1b
                   <div class="form-group row">
                     <label
                       for="DateTimes"
@@ -152,7 +146,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
               </div>
             </div>
           </div>
->>>>>>> origin/quanghuy_addfile
         </div>
         <!-- Spinner End -->
 
@@ -222,7 +215,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form name="loginform" action="LoginServlet" method="post">
+                            <form name="loginform" action="LoginServlet" method="post" >
                                 <div class="form-group row">
                                     <label
                                         for=""
@@ -1637,7 +1630,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
     ></script>
-<<<<<<< HEAD
     <script type="text/javascript">
                                 $(window).on('load', function () {
                                     if (${LoginError!=null})
@@ -1645,14 +1637,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 });
     </script>
 
-=======
        <script type="text/javascript">
         $(window).on('load', function () {
           if(${LoginError!=null})
             $('#loginModal').modal('show');
         });
     </script>
->>>>>>> origin/quanghuy_addfile
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 
