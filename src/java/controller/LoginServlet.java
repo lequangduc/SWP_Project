@@ -119,7 +119,7 @@ public class LoginServlet extends HttpServlet {
             if (accounts.get(i).getUsername().equals(userName) && accounts.get(i).getPassword().equals(password)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("userLogin", accounts.get(i));
-                session.setAttribute("userRegister", accounts.get(i));
+                // session.setAttribute("userRegister", accounts.get(i));
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
             }
