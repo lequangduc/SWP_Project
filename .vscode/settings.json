@@ -2,14 +2,6 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "f:\\NetBeans\\NetBeans-13\\netbeans\\lib\\servlet-api-3.0-alpha-1.jar",
-<<<<<<< HEAD
         "f:\\NetBeans\\NetBeans-13\\netbeans\\lib\\jstl-1.2.jar"
-=======
-<<<<<<< HEAD
-        "d:\\FPT\\FALL 2022\\SWP391\\servlet-api.jar"
-=======
-        "d:\\JavaWebDevelopment\\apache-tomcat-9.0.63\\lib\\servlet-api.jar"
->>>>>>> 850fe24ffd73da0bddf30ab9b75cafd1599f8b1b
->>>>>>> origin/quanghuy_addfile
     ]
 }
