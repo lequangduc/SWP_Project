@@ -4,7 +4,8 @@
  */
 package DAO;
 
-import DBContext.DBContext;
+import Context.DBContext;
+
 import entity.Food;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

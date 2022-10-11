@@ -64,17 +64,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
-        Account a = null;
-        try {
-            a = new AccountDAO().getAccount(userName, password);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (a!=null) {
-            request.getRequestDispatcher("menu.jsp").forward(request, response);
-        }
+        
     }
 
     /**
@@ -88,22 +78,17 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //get parameters from jsp
+         //get parameters from jsp
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         /// test account
         if(userName.equals("admin") && password.equals("admin")){
-            request.getRequestDispatcher("AdminPage.jsp").forward(request, response);return;}
+            request.getRequestDispatcher("AdminPage/index.jsp").forward(request, response);return;}
         ///
 
         if(userName.isEmpty() || password.isEmpty()) {
-            request.setAttribute("LoginError","User name or Password is bank");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-        if(userName.isEmpty() || password.isEmpty()) {
-            request.setAttribute("LoginError","User name or Password is bank");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.setAttribute("LoginError","User name or Password is blank");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
         }
 
@@ -120,11 +105,12 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session= request.getSession();
                 session.setAttribute("userLogin", accounts.get(i));
                 session.setAttribute("userRegister",accounts.get(i));
-                request.getRequestDispatcher("index.html").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
             }
         }
-
+        request.setAttribute("LoginError","Login failed");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     /**

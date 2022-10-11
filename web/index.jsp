@@ -143,7 +143,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </button>
               </div>
               <div class="modal-body">
-                <form action="LoginServlet" method="get">
+                <form action="LoginServlet" method="POST">
                   <div class="form-group row">
                     <label
                       for="DateTimes"
@@ -1422,7 +1422,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-
+       <script type="text/javascript">
+        $(window).on('load', function () {
+          if(${LoginError!=null})
+            $('#loginModal').modal('show');
+        });
+    </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
   </body>

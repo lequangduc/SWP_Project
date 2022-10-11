@@ -23,6 +23,12 @@ public class Reservation {
         this.dateReservation = dateReservation;
     }
 
+    public Reservation(int table_id, int customer_id, Date dateReservation) {
+        this.table_id = table_id;
+        this.customer_id = customer_id;
+        this.dateReservation = dateReservation;
+    }
+    
     public int getReservation_id() {
         return reservation_id;
     }
