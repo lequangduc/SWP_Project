@@ -3,7 +3,7 @@
     Created on : Sep 29, 2022, 8:38:12 PM
     Author     : admin
 --%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
@@ -67,7 +67,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <div
             id="spinner"
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
-            >
+            data=123>
             <div
                 class="spinner-border text-primary"
                 style="width: 3rem; height: 3rem"
@@ -75,7 +75,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 >
                 <span class="sr-only">Loading...</span>
             </div>
-            <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
+            <%-- <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
             <button class="btn">
               <a
                 data-toggle="modal"
@@ -83,9 +83,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 class="nav-item nav-link"
                 ><i class="fa fa-user"></i> Login</a
               >
-            </button>
-          </div>
-        </nav>
+            </button> --%>
+        </div>
         <!-- Spinner End -->
 
         <!-- Navbar & Hero Start -->
@@ -131,6 +130,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
+                    <%String loginUser = (String) session.getAttribute("userLogin");
+                    if (loginUser == null) {%>
                     <button class="btn">
                         <a
                             data-toggle="modal"
@@ -139,6 +140,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             ><i class="fa fa-user"></i> Login</a
                         >
                     </button>
+                    <%} else {%>
+                    <i class="fa fa-user ml-3"></i>   <%=loginUser%>
+                    <a class="ml-3" href="LoginServlet"><i class="fa fa-times"></i> Logout</a>
+                    <%}%>
                 </div>
             </nav>
             <div id="loginModal" class="modal fade" role="dialog">
@@ -1568,14 +1573,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
     ></script>
-    <script type="text/javascript">
-                                $(window).on('load', function () {
-                                    if (${LoginError!=null})
-                                        $('#loginModal').modal('show');
-                                });
-    </script>
 
-       <script type="text/javascript">
+    <script type="text/javascript">
         $(window).on('load', function () {
           if(${LoginError!=null})
             $('#loginModal').modal('show');

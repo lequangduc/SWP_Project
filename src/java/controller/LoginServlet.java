@@ -65,17 +65,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
-        Account a = null;
-        try {
-            a = new AccountDAO().getAccount(userName, password);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (a != null) {
-            request.getRequestDispatcher("menu.jsp").forward(request, response);
-        }
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+
     }
 
     /**
@@ -106,26 +99,20 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
         }
-
-        AccountDAO list = new AccountDAO();
-        ArrayList<Account> accounts = new ArrayList<Account>();
+        Account a = null;
         try {
-            accounts = list.getListAccounts();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            a = new AccountDAO().getAccount(userName, password);
+        } catch (SQLException ex) {
+            // Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("LoginError", "Login failed");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-        for (int i = 0; i < accounts.size(); i++) {
-            if (accounts.get(i).getUsername().equals(userName) && accounts.get(i).getPassword().equals(password)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("userLogin", accounts.get(i));
-                // session.setAttribute("userRegister", accounts.get(i));
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                break;
-            }
+        if (a != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("userLogin", a.getName());
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-        request.setAttribute("LoginError", "Login failed");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+
     }
 
     /**
