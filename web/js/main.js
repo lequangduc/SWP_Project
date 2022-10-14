@@ -111,21 +111,3 @@
     },
   });
 })(jQuery);
-function validateLoginForm(event) {
-  event.preventDefault();
-  if (document.loginform.userName.value == "") {
-    //alert("User Name can not be left blank");
-    document.loginform.userName.focus();
-    document.getElementById("LunameErr").textContent =
-      "*User name can not be left blank";
-    return false;
-  } else if (document.loginform.password.value == "") {
-    //alert("Password can not be left blank");
-    document.loginform.password.focus();
-    document.getElementById("LpasswordErr").textContent =
-      "*Password can not be left blank";
-    return false;
-  } else {
-    document.loginform.submit(); // fire submit event
-  }
-}

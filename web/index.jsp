@@ -239,7 +239,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form name="registerform" action="RegisterServlet" method="post" onSubmit="return validateRegisterForm(event);">
+                            <form name="registerform" action="RegisterServlet" method="post" onSubmit="return validateRegisterForm0(event);">
                                 <div class="form-group row">
                                     <label
                                         for=""
@@ -298,6 +298,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             placeholder="Please enter your email"
                                             />
                                     </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="emailErr">
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label
@@ -315,6 +318,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             placeholder="Please enter 10 digits"
                                             />
 
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="phoneErr">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -1594,7 +1600,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             }
         });
     </script>
-    <script class="text/javascript">
+    <script name="validateLogin&Register" class="text/javascript">
             function validateLoginForm(event) {
         event.preventDefault();
         if (document.loginform.userName.value == "") {
@@ -1613,12 +1619,45 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             document.loginform.submit(); // fire submit event
         }
         }
+                function validateRegisterForm0(event) {
+        event.preventDefault(); // this will prevent the submit event.
+        if (document.registerform.userName.value == "") {
+            //alert("User Name can not be left blank");
+            document.registerform.userName.focus();
+            document.getElementById("unameErr").textContent =
+            "*User name can not be left blank";
+            return false;
+        } else if (document.registerform.password.value == "") {
+            //alert("Password can not be left blank");
+            document.registerform.password.focus();
+            document.getElementById("passwordErr").textContent =
+            "*Password can not be left blank";
+            return false;
+        } else if (document.registerform.email.value == "") {
+            //alert("Email can not be left blank");
+            document.registerform.email.focus();
+            document.getElementById("emailErr").textContent =
+            "*Email can not be left blank";
+            return false;
+        } else if (document.registerform.phone.value == "") {
+            //alert("Phone can not be left blank");
+            document.registerform.phone.focus();
+            document.getElementById("phoneErr").textContent =
+            "*Phone can not be left blank";
+            return false;
+        } else if (document.registerform.name.value == "") {
+            //alert("Name can not be left blank");
+            document.registerform.name.focus();
+            document.getElementById("nameErr").textContent =
+            "*Name can not be left blank";
+            return false;
+        } else {
+            document.registerform.submit(); // fire submit event
+        }
+        }
     </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
-    <%-- created js --%>
-    <script src="js/main1.js"></script>
 
 
 
