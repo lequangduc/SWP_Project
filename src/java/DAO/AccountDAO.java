@@ -22,7 +22,7 @@ import entity.Account;
  */
 public class AccountDAO implements Serializable {
 
-    public Account getAccount(String username,String password) throws SQLException {
+    public Account getAccount(String username, String password) throws SQLException {
         Account a = null;
         Connection conn = null;
         PreparedStatement ps = null;
@@ -80,9 +80,9 @@ public class AccountDAO implements Serializable {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-//            rs.close();
-//            ps.close();
-//            conn.close();
+            // rs.close();
+            // ps.close();
+            // conn.close();
         }
         return accounts;
     }
@@ -90,18 +90,17 @@ public class AccountDAO implements Serializable {
     public void createAccount(Account account) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
-        //ResultSet rs = null;
+        // ResultSet rs = null;
         try {
-            String sql = "insert into account values (?, ? , ?, ?, ?, ?, ?) ";
+            String sql = "insert into account values (?, ? , ?, ?, ?, ?) ";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, account.getAccount_id());
-            ps.setString(2, account.getName());
-            ps.setString(3, account.getPhone());
-            ps.setString(4, account.getEmail());
-            ps.setString(5, account.getUsername());
-            ps.setString(6, account.getPassword());
-            ps.setInt(7, account.getRole_id());
+            ps.setString(1, account.getName());
+            ps.setString(2, account.getPhone());
+            ps.setString(3, account.getEmail());
+            ps.setString(4, account.getUsername());
+            ps.setString(5, account.getPassword());
+            ps.setInt(6, account.getRole_id());
 
             ps.execute();
         } catch (Exception e) {
@@ -115,7 +114,7 @@ public class AccountDAO implements Serializable {
     public void deleteAccount(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
-        //ResultSet rs = null;
+        // ResultSet rs = null;
         String sql = "delete from account where account_id =?";
         try {
             conn = new DBContext().getConnection();
@@ -137,7 +136,7 @@ public class AccountDAO implements Serializable {
     public void updateStudent(Account account) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
-        //ResultSet rs = null;
+        // ResultSet rs = null;
 
         try {
             String sql = "update account set name=?, phone=?, email=?, username=?, password=?, role_id=? where account_id=?";

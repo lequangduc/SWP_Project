@@ -142,7 +142,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </button>
                     <%} else {%>
                     <i class="fa fa-user ml-3"></i>   <%=loginUser%>
-                    <a class="ml-3" href="LoginServlet"><i class="fa fa-times"></i> Logout</a>
+                    <a class="ml-3" href="LoginServlet"><i class="fa fa-times"> Logout</i></a>
                     <%}%>
                 </div>
             </nav>
@@ -173,7 +173,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             class="form-control"
                                             id="userName"
                                             name="userName"
-                                            placeholder="User name"
+                                            placeholder="enter username"
+                                            value="${resusername}"
                                             />
                                     </div>
                                 </div>
@@ -190,7 +191,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             class="form-control"
                                             id="password"
                                             name="password"
-                                            placeholder="Password"
+                                            placeholder="enter password"
+                                            value="${respassword}"
                                             />
                                     </div>
                                 </div>
@@ -1576,8 +1578,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
     <script type="text/javascript">
         $(window).on('load', function () {
-          if(${LoginError!=null})
+          if(${LoginError!=null} || ${Registersuccess!=null}){
             $('#loginModal').modal('show');
+            }
+          if(${RegError!=null}){
+            $('#registerModal').modal('show');
+            alert("${RegError}");
+            }
         });
     </script>
     <!-- Template Javascript -->
