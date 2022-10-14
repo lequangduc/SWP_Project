@@ -94,11 +94,6 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         ///
-        if (userName.isEmpty() || password.isEmpty()) {
-            request.setAttribute("LoginError", "User name or Password is bank");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
-        }
         Account a = null;
         try {
             a = new AccountDAO().getAccount(userName, password);

@@ -157,4 +157,35 @@ public class AccountDAO implements Serializable {
             ps.close();
         }
     }
+
+    public Account checkduplicateUsername(String username) throws SQLException {
+        Account a = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from account where username = ?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString("name").trim();
+                String phone = rs.getString("phone").trim();
+                String email = rs.getString("email").trim();
+                String username1 = rs.getString("username").trim();
+                String password = rs.getString("password").trim();
+                int role_id = rs.getInt("role_id");
+
+                a = new Account(name, phone, email, username1, password, role_id);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            rs.close();
+            ps.close();
+            conn.close();
+        }
+        return a;
+    }
 }

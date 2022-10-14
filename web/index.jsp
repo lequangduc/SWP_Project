@@ -159,15 +159,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form name="loginform" action="LoginServlet" method="post" >
+                            <form name="loginform" action="LoginServlet" method="post" onSubmit="return validateLoginForm(event);">
                                 <div class="form-group row">
                                     <label
                                         for=""
-                                        class="col-12 col-md-4 col-form-label"
+                                        class="col-12 col-md-3 col-form-label"
                                         >Username</label
                                     >
 
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <input
                                             type="text"
                                             class="form-control"
@@ -177,15 +177,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             value="${resusername}"
                                             />
                                     </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="LunameErr">
+                                    </div>
+
                                 </div>
                                 <div class="form-group row">
                                     <label
                                         for=""
-                                        class="col-12 col-md-4 col-form-label"
+                                        class="col-12 col-md-3 col-form-label"
                                         >Password</label
                                     >
 
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <input
                                             type="text"
                                             class="form-control"
@@ -194,6 +198,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             placeholder="enter password"
                                             value="${respassword}"
                                             />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="LpasswordErr">
                                     </div>
                                 </div>
                                 <div class="form-row mt-4">
@@ -236,17 +243,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="form-group row">
                                     <label
                                         for=""
-                                        class="col-12 col-md-4 col-form-label"
+                                        class="col-12 col-md-3 col-form-label"
                                         >Username</label
                                     >
 
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="userName"
                                             name="userName"
-                                            placeholder="User name"
+                                            placeholder="Please enter username"
                                             />
                                         
                                     </div>
@@ -258,17 +265,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="form-group row">
                                     <label
                                         for=""
-                                        class="col-12 col-md-4 col-form-label"
+                                        class="col-12 col-md-3 col-form-label"
                                         >Password</label
                                     >
 
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="password"
                                             name="password"
-                                            placeholder="Password"
+                                            placeholder="Please enter password"
                                             />
                                     </div>
                                     <div class="col-12 col-md-4">
@@ -278,34 +285,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="form-group row">
                                     <label
                                         for=""
-                                        class="col-12 col-md-4 col-form-label"
+                                        class="col-12 col-md-3 col-form-label"
                                         >Email</label
                                     >
 
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="email"
                                             name="email"
-                                            placeholder="email"
+                                            placeholder="Please enter your email"
                                             />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label
                                         for=""
-                                        class="col-12 col-md-4 col-form-label"
+                                        class="col-12 col-md-3 col-form-label"
                                         >Phone</label
                                     >
 
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="phone"
                                             name="phone"
-                                            placeholder="phone"
+                                            placeholder="Please enter 10 digits"
                                             />
 
                                     </div>
@@ -313,17 +320,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="form-group row">
                                     <label
                                         for=""
-                                        class="col-12 col-md-4 col-form-label"
+                                        class="col-12 col-md-3 col-form-label"
                                         >Name</label
                                     >
 
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="name"
                                             name="name"
-                                            placeholder="name"
+                                            placeholder="Please enter your name"
                                             />
                                     </div>
                                     <div class="col-12 col-md-4">
@@ -1586,6 +1593,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             alert("${RegError}");
             }
         });
+    </script>
+    <script class="text/javascript">
+            function validateLoginForm(event) {
+        event.preventDefault();
+        if (document.loginform.userName.value == "") {
+            //alert("User Name can not be left blank");
+            document.loginform.userName.focus();
+            document.getElementById("LunameErr").textContent =
+            "*User name can not be left blank";
+            return false;
+        } else if (document.loginform.password.value == "") {
+            //alert("Password can not be left blank");
+            document.loginform.password.focus();
+            document.getElementById("LpasswordErr").textContent =
+            "*Password can not be left blank";
+            return false;
+        } else {
+            document.loginform.submit(); // fire submit event
+        }
+        }
     </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

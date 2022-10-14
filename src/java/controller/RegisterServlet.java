@@ -86,26 +86,42 @@ public class RegisterServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String name = request.getParameter("name");
         AccountDAO dao = new AccountDAO();
-        Account newaccount = new Account(name, phone, email, username, password, 3);
-        try {
-            dao.createAccount(newaccount);
-        } catch (SQLException ex) {
-        }
-        Account a = null;
-        try {
-            a = dao.getAccount(username, password);
-        } catch (SQLException ex) {
-        }
-        if (a == null) {
-            request.setAttribute("RegError", "register fail");
+        Account b = null;
+        if (username == "admin") {
+            request.setAttribute("RegError", "Username can't be admin");
             request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
+        }
+        try {
+            b = dao.checkduplicateUsername(username);
+        } catch (SQLException ex) {
+        }
+        if (b != null) {
+            request.setAttribute("RegError", "username is already exist");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
         } else {
-            request.setAttribute("Registersuccess", "ok");
-            request.setAttribute("resusername", username);
-            request.setAttribute("respassword", password);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
+            Account newaccount = new Account(name, phone, email, username, password, 3);
+            try {
+                dao.createAccount(newaccount);
+            } catch (SQLException ex) {
+            }
+            Account a = null;
 
+            try {
+                a = dao.getAccount(username, password);
+            } catch (SQLException ex) {
+            }
+            if (a == null) {
+                request.setAttribute("RegError", "register fail");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                request.setAttribute("Registersuccess", "ok");
+                request.setAttribute("resusername", username);
+                request.setAttribute("respassword", password);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        }
     }
 
     /**
