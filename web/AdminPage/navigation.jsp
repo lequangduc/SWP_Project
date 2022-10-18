@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+        <link rel="stylesheet" href="AdminPage/css/mycss.css">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -19,12 +20,12 @@
                         <span class="align-middle">Admin Page</span>
                     </a>
                     <ul class="sidebar-nav" >
-                        <li class="sidebar-header">
+                        <li class="active"><button style="border:none" class="sidebar-header">
                             Dashboard
-                        </li>
-                        <li class="sidebar-header" data-toggle="collapse" data-target="#pagecomponent">
+                        </button></li>
+                        <li class="active"><button style="border:none;" class="sidebar-header" data-toggle="collapse" data-target="#pagecomponent">
                             Manage Order
-                        </li>
+                        </button></li>
                         <div id="pagecomponent" class="collapse">
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="index.html">
@@ -57,9 +58,9 @@
 
                             </li>
                         </div>
-                        <li class="sidebar-header" data-toggle="collapse" data-target="#toolcomponent">
+                        <li class="active"><button style="border:none" class="sidebar-header" data-toggle="collapse" data-target="#toolcomponent">
                             Manage Food
-                        </li>
+                        </button></li>
                         <div id="toolcomponent" class="collapse">
                             <li class="sidebar-item" data-toggle="collapse" data-target="#subcomponent1">
                                 <span class="sidebar-link">
@@ -106,9 +107,9 @@
                             
                         </div>
 
-                        <li class="sidebar-header" data-toggle="collapse" data-target="#tablecomponent" >
+                        <li class="active"><button style="border:none;" class="sidebar-header" data-toggle="collapse" data-target="#tablecomponent" >
                             Manage Table
-                        </li>
+                        </button></li>
                         <div id="tablecomponent" class="collapse">
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="charts-chartjs.html">
@@ -122,9 +123,9 @@
                                 </a>
                             </li>
                         </div>
-                      <li class="sidebar-header" data-toggle="collapse" data-target="#plugincomponent" >
+                      <li class="active"><button style="border:none;" class="sidebar-header" data-toggle="collapse" data-target="#plugincomponent" >
                             Reservation 
-                        </li>
+                        </button></li>
                         <div id="plugincomponent" class="collapse">
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="charts-chartjs.html">
@@ -145,6 +146,22 @@
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="maps-google.html">
                                     <span class="align-middle">Reservation Setting</span>
+                                </a>
+                            </li>
+                        </div>
+                        <li class="active"><button style="border: none;" class="sidebar-header" data-toggle="collapse" data-target="#subcomponent3" >
+                            Manage Employee Accounts
+                        </button></li>
+                        <div id="subcomponent3" class="collapse">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="charts-chartjs.html">
+                                     <span class="align-middle">Accounts List</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="maps-google.html">
+                                    <span class="align-middle">Create Accounts</span>
                                 </a>
                             </li>
                         </div>

@@ -18,6 +18,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <meta content="" name="keywords" />
     <meta content="" name="description" />
 
+    <%-- my stylesheet --%>
+    <link href="css/mycss.css" rel="stylesheet" />
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon" />
 
