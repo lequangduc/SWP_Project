@@ -20,9 +20,9 @@
                         <span class="align-middle">Admin Page</span>
                     </a>
                     <ul class="sidebar-nav" >
-                        <li class="active"><button style="border:none" class="sidebar-header">
+                        <li class="active"><a href="${request.contextPath}/SWP_Project/AdminPage"><button style="border:none" class="sidebar-header">
                             Dashboard
-                        </button></li>
+                        </button></a></li>
                         <li class="active"><button style="border:none;" class="sidebar-header" data-toggle="collapse" data-target="#pagecomponent">
                             Manage Order
                         </button></li>
@@ -154,13 +154,13 @@
                         </button></li>
                         <div id="subcomponent3" class="collapse">
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="charts-chartjs.html">
+                                <a class="sidebar-link" href="${request.contextPath}/SWP_Project/AdminPage/AccountList.jsp">
                                      <span class="align-middle">Accounts List</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="maps-google.html">
+                                <a class="sidebar-link" href="${request.contextPath}/SWP_Project/AdminPage/CreateAccount.jsp">
                                     <span class="align-middle">Create Accounts</span>
                                 </a>
                             </li>
