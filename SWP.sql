@@ -72,7 +72,7 @@ insert into tablestype(tabletype_name, capacity) values ('T4', 8);
 insert into tablestype(tabletype_name, capacity) values ('T6', 8);
 insert into tablestype(tabletype_name, capacity) values ('T8', 8);
 
-delete from tablestype
+
 
 -----------------------------------------------------------------------------------
 select * from tables
@@ -104,7 +104,7 @@ insert into tables(tabletype_id, status) values (03, 'reserved');
 insert into tables(tabletype_id, status) values (03, 'occupied');
 insert into tables(tabletype_id, status) values (03, 'available');
 
-delete from tables
+
 
 -----------------------------------------------------------------------------------
 select * from foodtype
@@ -114,7 +114,7 @@ insert into foodtype(foodtype_name) values ('main dish');
 insert into foodtype(foodtype_name) values ('dessert');
 insert into foodtype(foodtype_name) values ('drink');
 
-delete from foodtype
+
 
 -----------------------------------------------------------------------------------
 select * from food 
@@ -258,7 +258,6 @@ insert into food(name, price, foodtype_id, fooddescription, foodimage) values
 ('Old Fashioned', 80000, 4, 'With an air of class and sophistication, the Old Fashioned cocktail is a classic that remains just as popular now as it did over 200 years ago.', 
 'https://drive.google.com/file/d/1UyMxPhjeVauIVqTLpKChPCUhKqU0p3Qm/view?usp=sharing');
 
-delete from food
 
 -----------------------------------------------------------------------------------
 select * from roles
@@ -267,8 +266,6 @@ insert into roles(role) values ('manager');
 insert into roles(role) values ('cashier');
 insert into roles(role) values ('customer');
 insert into roles(role) values ('kitchenstaff');
-
-delete from roles
 
 -----------------------------------------------------------------------------------
 select * from account
@@ -300,7 +297,7 @@ insert into account(name, phone, email, username, password, role_id) values
 insert into account(name, phone, email, username, password, role_id) values
 ('Lee AAA13', '0856995566', 'cus7@gmail.com', 'cus7', '000', 3); 
 
-delete from account
+
 
 -----------------------------------------------------------------------------------
 select * from reservation
@@ -316,7 +313,7 @@ insert into reservation(table_id, customer_id, dateReservation) values
 insert into reservation(table_id, customer_id, dateReservation) values
 (22, 1010, '2022-10-05 18:00:00');
 
-delete from reservation
+
 -----------------------------------------------------------------------------------
 
 select * from reservationDetail
@@ -458,7 +455,7 @@ insert into reservationDetail(reservation_id, food_id, quantity) values
 insert into reservationDetail(reservation_id, food_id, quantity) values
 (1004, 164, 8);
 
-delete from reservationDetail
+
 -----------------------------------------------------------------------------------
 
 select * from rating
