@@ -43,6 +43,16 @@ public class Account {
         this.role = role;
     }
 
+    public Account(String name, String phone, String email, String username, String password,
+            String role) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     public Account(String name, String phone, String email, String username, String password, int role_id) {
         this.name = name;
         this.phone = phone;

@@ -143,11 +143,186 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         >
                     </button>
                     <%} else {%>
-                    <i class="fa fa-user ml-3"></i>   <%=loginUser%>
-                    <a class="ml-3" href="LoginServlet"><i class="fa fa-times"> Logout</i></a>
+                    <%-- <i class="fa fa-user ml-3"></i>   <%=loginUser%>
+                    <a class="ml-3" href="LoginServlet"><i class="fa fa-times"> Logout</i></a> --%>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                                    <i class="align-middle" data-feather="settings"></i>
+                                </a>
+
+                                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                                    <i class="fa fa-user ml-3"></i>  ${userLogin} <span class="text-dark"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UpdateModal"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="LoginServlet">Log out</a>
+                                </div>
+                            </li>
                     <%}%>
                 </div>
             </nav>
+                <%-- UpdateModal --%>
+            <div id="UpdateModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg" role="content">
+                    <!--Register Modal content-->
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Update Account</h3>
+
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form name="updateform" action="ManageProfileServlet" method="post" onSubmit="return validateUpdateForm(event);"
+                                  oninput='RePassword.setCustomValidity(RePassword.value != password.value ? "Passwords do not match." : "")'>
+                                <input type="hidden" name="id" value=${loggedAccount.account_id}>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Username</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="userName"
+                                            name="userName"
+                                            placeholder=${loggedAccount.username}
+                                            value=${loggedAccount.username}
+                                            />
+                                        
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="unameErr">
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Password</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            placeholder=${loggedAccount.password}
+                                            value=${loggedAccount.password}
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="passwordErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Confirm Password</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="RePassword"
+                                            class="form-control"
+                                            id="RePassword"
+                                            name="RePassword"
+                                            placeholder="Please re-enter password"
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="RePasswordErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Email</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="email"
+                                            name="email"
+                                            placeholder=${loggedAccount.email}
+                                            value=${loggedAccount.email}
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="emailErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Phone</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="phone"
+                                            name="phone"
+                                            placeholder="Please enter 10 digits"
+                                            value=${loggedAccount.phone}
+                                            />
+
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="phoneErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Name</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            name="name"
+                                            placeholder=${loggedAccount.name}
+                                            value=${loggedAccount.name}
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="nameErr">
+                                    </div>
+                                </div>
+
+                                <div class="form-row mt-4">
+                                    <div class="offset-md-4 col-md-10">
+                                        <button type="submit" class="btn btn-primary btn-sm ml-1">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    <%--  --%>
             <div id="loginModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-lg" role="content">
                     <!--Login Modal content-->
@@ -193,7 +368,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
                                     <div class="col-12 col-md-4">
                                         <input
-                                            type="text"
+                                            type="password"
                                             class="form-control"
                                             id="password"
                                             name="password"
@@ -241,7 +416,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form name="registerform" action="RegisterServlet" method="post" onSubmit="return validateRegisterForm0(event);">
+                            <form name="registerform" action="RegisterServlet" method="post" onSubmit="return validateRegisterForm0(event);"
+                                  oninput='RePassword.setCustomValidity(RePassword.value != password.value ? "Passwords do not match." : "")'>
                                 <div class="form-group row">
                                     <label
                                         for=""
@@ -273,7 +449,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
                                     <div class="col-12 col-md-4">
                                         <input
-                                            type="text"
+                                            type="password"
                                             class="form-control"
                                             id="password"
                                             name="password"
@@ -282,6 +458,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                     </div>
                                     <div class="col-12 col-md-4">
                                       <span style="color:red" id="passwordErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Confirm Password</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="RePassword"
+                                            class="form-control"
+                                            id="RePassword"
+                                            name="RePassword"
+                                            placeholder="Please re-enter password"
+                                            />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -1600,6 +1793,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             $('#registerModal').modal('show');
             alert("${RegError}");
             }
+          if(${UpdateError!=null}){
+            $('#UpdateModal').modal('show');
+            alert("${UpdateError}");
+            }
         });
     </script>
     <script name="validateLogin&Register" class="text/javascript">
@@ -1655,6 +1852,48 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             return false;
         } else {
             document.registerform.submit(); // fire submit event
+        }
+        }
+        function validateUpdateForm(event) {
+            event.preventDefault(); // this will prevent the submit event.
+        if (document.updateform.userName.value == "") {
+            //alert("User Name can not be left blank");
+            document.updateform.userName.focus();
+            document.getElementById("unameErr").textContent =
+            "*User name can not be left blank";
+            return false;
+        } else if (document.updateform.password.value == "") {
+            //alert("Password can not be left blank");
+            document.updateform.password.focus();
+            document.getElementById("passwordErr").textContent =
+            "*Password can not be left blank";
+            return false;
+        } else if (document.updateform.email.value == "") {
+            //alert("Email can not be left blank");
+            document.updateform.email.focus();
+            document.getElementById("emailErr").textContent =
+            "*Email can not be left blank";
+            return false;
+        } else if (document.updateform.phone.value == "") {
+            //alert("Phone can not be left blank");
+            document.updateform.phone.focus();
+            document.getElementById("phoneErr").textContent =
+            "*Phone can not be left blank";
+            return false;
+        } else if (document.updateform.name.value == "") {
+            //alert("Name can not be left blank");
+            document.updateform.name.focus();
+            document.getElementById("nameErr").textContent =
+            "*Name can not be left blank";
+            return false;
+        }else if (document.updateform.RePassword.value == "") {
+            document.updateform.RePassword.focus();
+            document.getElementById("RePasswordErr").textContent =
+            "*this fields can not be left blank";
+            return false;
+        }
+         else {
+            document.updateform.submit(); // fire submit event
         }
         }
     </script>

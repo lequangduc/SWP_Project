@@ -74,8 +74,24 @@ public class AccountDAO implements Serializable {
                 String username = rs.getString("username").trim();
                 String password = rs.getString("password").trim();
                 int role_id = rs.getInt("role_id");
-
-                accounts.add(new Account(id, name, phone, email, username, password, role_id));
+                switch (role_id) {
+                    case 1:
+                        accounts.add(new Account(id, name, phone, email, username, password, "Manager"));
+                        break;
+                    case 2:
+                        accounts.add(new Account(id, name, phone, email, username, password, "Cashier"));
+                        break;
+                    case 3:
+                        accounts.add(new Account(id, name, phone, email, username, password, "Customer"));
+                        break;
+                    case 4:
+                        accounts.add(new Account(id, name, phone, email, username, password, "Kitchen staff"));
+                        break;
+                    default:
+                        break;
+                }
+                // accounts.add(new Account(id, name, phone, email, username, password,
+                // role_id));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -133,22 +149,22 @@ public class AccountDAO implements Serializable {
         }
     }
 
-    public void updateStudent(Account account) throws SQLException {
+    public void updateAccount(int id, String username, String password, String email, String phone, String name)
+            throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         // ResultSet rs = null;
 
         try {
-            String sql = "update account set name=?, phone=?, email=?, username=?, password=?, role_id=? where account_id=?";
+            String sql = "update account set name=?, phone=?, email=?, username=?, password=? where account_id=?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setInt(7, account.getAccount_id());
-            ps.setString(1, account.getName());
-            ps.setString(2, account.getPhone());
-            ps.setString(3, account.getEmail());
-            ps.setString(4, account.getUsername());
-            ps.setString(5, account.getPassword());
-            ps.setInt(6, account.getRole_id());
+            ps.setInt(6, id);
+            ps.setString(1, name);
+            ps.setString(2, phone);
+            ps.setString(3, email);
+            ps.setString(4, username);
+            ps.setString(5, password);
             ps.execute();
         } catch (Exception e) {
             System.out.println(e);

@@ -7,24 +7,20 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import DAO.AccountDAO;
 import entity.Account;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author LENOVO
  */
-public class LoginServlet extends HttpServlet {
+public class EmpAccountServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +39,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
+            out.println("<title>Servlet EmpAccountServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EmpAccountServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,9 +61,15 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        AccountDAO list = new AccountDAO();
+        try {
+            list.deleteAccount(id);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        request.getRequestDispatcher("AdminPage/AccountList.jsp").forward(request, response);
 
     }
 
@@ -82,36 +84,51 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // get parameters from jsp
-        String userName = request.getParameter("userName");
+        String username = request.getParameter("userName");
         String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String name = request.getParameter("name");
+        int roleid = Integer.parseInt(request.getParameter("roles"));
 
-        // get parameters from jsp
-
-        /// test account
-        if (userName.equals("admin") && password.equals("admin")) {
-            request.getRequestDispatcher("AdminPage/index.jsp").forward(request, response);
+        AccountDAO dao = new AccountDAO();
+        Account b = null;
+        if (username == "admin") {
+            request.setAttribute("RegError", "*Username can't be admin");
+            request.getRequestDispatcher("AdminPage/CreateAccount.jsp").forward(request, response);
             return;
         }
-        ///
-        Account a = null;
         try {
-            a = new AccountDAO().getAccount(userName, password);
+            b = dao.checkduplicateUsername(username);
         } catch (SQLException ex) {
-            // Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("LoginError", "Login failed");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-        if (a != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("userLogin", a.getName());
-            session.setAttribute("loggedAccount", a);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+        if (b != null) {
+            request.setAttribute("addErr", "*username is already exist");
+            request.getRequestDispatcher("AdminPage/CreateAccount.jsp")
+                    .forward(request, response);
+            return;
         } else {
-            request.setAttribute("LoginError", "Login failed");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
+            Account newaccount = new Account(name, phone, email, username, password, roleid);
+            try {
+                dao.createAccount(newaccount);
+            } catch (SQLException ex) {
+            }
+            Account a = null;
 
+            try {
+                a = dao.getAccount(username, password);
+            } catch (SQLException ex) {
+            }
+            if (a == null) {
+                request.setAttribute("addErr", "*Add fail");
+                request.getRequestDispatcher("AdminPage/CreateAccount.jsp")
+                        .forward(request, response);
+            } else {
+                request.setAttribute("addErr", "*Add success");
+                request.getRequestDispatcher("AdminPage/CreateAccount.jsp")
+                        .forward(request, response);
+            }
+        }
     }
 
     /**

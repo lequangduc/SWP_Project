@@ -7,7 +7,6 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,14 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import DAO.AccountDAO;
 import entity.Account;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author LENOVO
  */
-public class LoginServlet extends HttpServlet {
+public class ManageProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +40,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
+            out.println("<title>Servlet ManageProfileServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManageProfileServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,10 +62,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-
     }
 
     /**
@@ -82,36 +75,30 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // get parameters from jsp
-        String userName = request.getParameter("userName");
+        HttpSession session = request.getSession();
+        int id = Integer.parseInt(request.getParameter("id"));
+        String username = request.getParameter("userName");
         String password = request.getParameter("password");
-
-        // get parameters from jsp
-
-        /// test account
-        if (userName.equals("admin") && password.equals("admin")) {
-            request.getRequestDispatcher("AdminPage/index.jsp").forward(request, response);
-            return;
-        }
-        ///
-        Account a = null;
-        try {
-            a = new AccountDAO().getAccount(userName, password);
-        } catch (SQLException ex) {
-            // Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("LoginError", "Login failed");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String name = request.getParameter("name");
+        AccountDAO dao = new AccountDAO();
+        Account a = new Account(name, phone, email, username, password, 3);
+        if (username == "admin") {
+            request.setAttribute("UpdateError", "Username can't be admin");
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-        if (a != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("userLogin", a.getName());
+            return;
+        } else {
+            try {
+                dao.updateAccount(id, username, password, email, phone, name);
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            session.setAttribute("userLogin", name);
             session.setAttribute("loggedAccount", a);
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            request.setAttribute("LoginError", "Login failed");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-
     }
 
     /**
