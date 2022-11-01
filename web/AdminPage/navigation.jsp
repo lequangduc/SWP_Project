@@ -16,7 +16,7 @@
         
             <nav id="sidebar" class="sidebar js-sidebar">
                 <div class="sidebar-content js-simplebar">
-                    <a class="sidebar-brand" href="index.html">
+                    <a class="sidebar-brand" href="index.jsp">
                         <span class="align-middle">Admin Page</span>
                     </a>
                     <ul class="sidebar-nav" >
@@ -28,7 +28,7 @@
                         </button></li>
                         <div id="pagecomponent" class="collapse">
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="index.html">
+                                <a class="sidebar-link" href="index.jsp">
                                      <span class="align-middle">Order List</span>
                                 </a>
                             </li>
@@ -112,7 +112,7 @@
                         </button></li>
                         <div id="tablecomponent" class="collapse">
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="charts-chartjs.html">
+                                <a class="sidebar-link" href="TableServlet?action=managetablelist">
                                      <span class="align-middle">Table List</span>
                                 </a>
                             </li>
