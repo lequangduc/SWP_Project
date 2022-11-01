@@ -28,6 +28,14 @@
         <servlet-name>ManageProfileServlet</servlet-name>
         <servlet-class>controller.ManageProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddFoodServlet</servlet-name>
+        <servlet-class>controller.AddFoodServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageFood</servlet-name>
+        <servlet-class>controller.ManageFood</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>ManageProfileServlet</servlet-name>
         <url-pattern>/ManageProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFoodServlet</servlet-name>
+        <url-pattern>/AddFoodServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageFood</servlet-name>
+        <url-pattern>/ManageFood</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

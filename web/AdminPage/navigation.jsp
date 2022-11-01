@@ -69,36 +69,31 @@
                             </li>
                             <div id="subcomponent1" class="collapse">
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link">
+                                    <a class="sidebar-link" href="./AddFoodType.jsp">
                                          <span class="align-middle subtype">&nbsp + Add Category</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link">
+                                    <a class="sidebar-link" href = "./ListFoodType.jsp">
                                         </re> <span class="align-middle subtype">&nbsp + Category List</span>
                                     </a>
                                 </li>
                             </div>
                             
                             <li class="sidebar-item" data-toggle="collapse" data-target="#subcomponent2">
-                                <a class="sidebar-link">
+                                <a class="sidebar-link" >
                                      <span class="align-middle">Manage Food</span>
                                 </a>
                             </li>
                             <div id="subcomponent2" class="collapse">
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link">
+                                    <a class="sidebar-link" href = "./AddFoodPage.jsp">
                                          <span class="align-middle subtype">&nbsp + Add Food</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link">
+                                    <a class="sidebar-link" href="./ListFood.jsp">
                                          <span class="align-middle subtype">&nbsp + Food List</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item" >
-                                    <a class="sidebar-link">
-                                         <span class="align-middle subtype">&nbsp + Menu Food</span>
                                     </a>
                                 </li>
                                 

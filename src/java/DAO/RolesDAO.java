@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Context.DBContext;
+import DBContext.DBContext;
 import entity.Role;
 
 public class RolesDAO implements Serializable {

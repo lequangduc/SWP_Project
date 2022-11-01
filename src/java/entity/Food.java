@@ -27,6 +27,14 @@ public class Food {
         this.foodImage = foodImage;
     }
 
+    public Food(String name, float price, int foodtype_id, String foodDescription, String foodImage) {
+        this.name = name;
+        this.price = price;
+        this.foodtype_id = foodtype_id;
+        this.foodDescription = foodDescription;
+        this.foodImage = foodImage;
+    }
+
     
     
     

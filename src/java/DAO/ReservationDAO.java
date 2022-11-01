@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import Context.DBContext;
+import DBContext.DBContext;
 import entity.Reservation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

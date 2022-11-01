@@ -4,22 +4,26 @@
  */
 package DAO;
 
-import Context.DBContext;
+import DBContext.DBContext;
 
 import entity.Food;
+import entity.FoodType;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author admin
  */
 public class FoodDAO {
-        public boolean addFoodType(String name) throws SQLException {
+
+    public boolean addFoodType(String name) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         int rs = 0;
@@ -143,6 +147,29 @@ public class FoodDAO {
         return false;
     }
 
+    public boolean addTypeFood(String typename) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int rs = 0;
+        try {
+            String sql = "INSERT INTO foodtype values(?)";
+            conn = new DBContext().getConnection();
+
+            ps.setString(1, typename);
+            rs = ps.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+
+            ps.close();
+            conn.close();
+        }
+        return false;
+    }
+
     public boolean deleteFood(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -195,6 +222,68 @@ public class FoodDAO {
             conn.close();
         }
         return list;
+
+    }
+
+    public Food getFoodByID(int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Food fo = new Food();
+        try {
+            String sql = "SELECT * from food where food_id=?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+
+                String name = rs.getString(2);
+                float price = rs.getFloat(3);
+                int foodtype_id = rs.getInt(4);
+                String description = rs.getString(5);
+                String image = rs.getString(6);
+                fo = new Food(id, name, price, foodtype_id, description, image);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            rs.close();
+            ps.close();
+            conn.close();
+        }
+        return fo;
+
+    }
+
+    public FoodType getFoodTypeByID(int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        FoodType fo = new FoodType();
+        try {
+            String sql = "SELECT * from foodtype where foodtype_id=?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+
+                String name = rs.getString(2);
+                fo = new FoodType(id, name);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            rs.close();
+            ps.close();
+            conn.close();
+        }
+        return fo;
 
     }
 
@@ -272,6 +361,32 @@ public class FoodDAO {
 
     }
 
+    public boolean updateFoodType(FoodType f) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int rs = 0;
+        try {
+            int id = f.getIdfoodtype();
+            String sql = "UPDATE foodtype SET foodtype_name=? WHERE foodtype_id = ?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, f.getFoodtypename());
+            ps.setInt(2, f.getIdfoodtype());
+            rs = ps.executeUpdate();
+            while (rs > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+
+            ps.close();
+            conn.close();
+        }
+        return false;
+
+    }
+
     public List<Food> getProductFromTo(int page, int pageSize) throws Exception {
         int from = page * pageSize - (pageSize - 1);
         int to = page * pageSize;
@@ -308,19 +423,22 @@ public class FoodDAO {
         }
         return foods;
     }
-    public List<String> getListAllTypeName() throws SQLException {
+
+    public List<FoodType> getListAllTypeName() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<String> list = new ArrayList<>();
+        List<FoodType> list = new ArrayList<>();
         try {
             String sql = "SELECT * from foodtype";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt(1);
                 String typename = rs.getString(2);
-                list.add(typename);
+                FoodType f = new FoodType(id, typename);
+                list.add(f);
             }
 
         } catch (Exception e) {
@@ -333,27 +451,31 @@ public class FoodDAO {
         return list;
 
     }
+
+    public int countDish(int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+            String sql = "SELECT COUNT(*) from food where foodtype_id = ?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                result = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            rs.close();
+            ps.close();
+            conn.close();
+        }
+        return result;
+
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
