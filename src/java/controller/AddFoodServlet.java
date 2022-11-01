@@ -60,6 +60,21 @@ public class AddFoodServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         FoodDAO pdao = new FoodDAO();
 
         String name = request.getParameter("name");
@@ -82,26 +97,12 @@ public class AddFoodServlet extends HttpServlet {
             Logger.getLogger(AddFoodServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (added) {
-            request.getRequestDispatcher("/AdminPage/ListFood.jsp").forward(request, response);
+            request.setAttribute("type", null);
+            request.getRequestDispatcher("./AdminPage/ListFood.jsp").forward(request, response);
         } else {
             request.setAttribute("errMessage", "Error add to database" + p);
-            request.getRequestDispatcher("/AdminPage/AddFoodPage.jsp").forward(request, response);
+            request.getRequestDispatcher("./AdminPage/AddFoodPage.jsp").forward(request, response);
         }
-
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

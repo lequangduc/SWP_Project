@@ -61,7 +61,7 @@
             <div class="main">
                 <%@include file="../AdminPage/navbar.jsp" %>
                 <h2>ADD NEW PRODUCT</h2>
-                <form action="${request.contextPath}/ARestaurantDemo/AddFoodServlet" method="POST" >
+                <form action="${request.contextPath}/SWP_Project/AddFoodServlet" method="POST" >
 
                     <table border="0">
 

@@ -63,65 +63,64 @@ public class ManageFood extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         FoodDAO pdao = new FoodDAO();
-        String type = request.getParameter("type");
-        String id = request.getParameter("id");
-        String page = "";
-        if (type.equals("deletetypefood")) {
-            String idtype = request.getParameter("idtype");
+        String link = request.getParameter("link");
+        if (link != null) {
+            request.getRequestDispatcher("./AdminPage/" + link).forward(request, response);
+        } else {
+            String type = request.getParameter("type");
+            String id = request.getParameter("id");
 
-            try {
-                if (pdao.countDish(Integer.parseInt(idtype)) > 0) {
-                    request.setAttribute("Status", "Update Failed");
+            if (type.equals("deletetypefood")) {
+                String idtype = request.getParameter("idtype");
 
-                } else {
-                    boolean deleted = pdao.deleteFoodType(Integer.parseInt(idtype));
-                    if (deleted) {
-                        request.setAttribute("Status", "Delete Successful");
+                try {
+                    if (pdao.countDish(Integer.parseInt(idtype)) > 0) {
+                        request.setAttribute("Status", "Update Failed");
+
                     } else {
-                        request.setAttribute("Status", "Delete Failed");
+                        boolean deleted = pdao.deleteFoodType(Integer.parseInt(idtype));
+                        if (deleted) {
+                            request.setAttribute("Status", "Delete Successful");
+                        } else {
+                            request.setAttribute("Status", "Delete Failed");
+                        }
                     }
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-            } catch (SQLException ex) {
-                Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                page = "AdminPage/ListFoodType.jsp";
             }
 
-        }
-
-        if (type.equals("delete")) {
-            boolean status = false;
-            try {
-                status = pdao.deleteFood(Integer.parseInt(id));
-            } catch (SQLException ex) {
-                Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
-            }finally {
-                page = "AdminPage/ListFood.jsp";
+            if (type.equals("delete")) {
+                boolean status = false;
+                try {
+                    status = pdao.deleteFood(Integer.parseInt(id));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (status) {
+                    request.setAttribute("Status", "Delete Successful");
+                } else {
+                    request.setAttribute("Status", "Delete Failed");
+                }
+                
             }
-            if (status) {
-                request.setAttribute("Status", "Delete Successful");
+
+            if ("all".equals(type)) {
+                request.setAttribute("type", null);
             } else {
-                request.setAttribute("Status", "Delete Failed");
+                try {
+                    request.setAttribute("type", pdao.getFoodTypeId(type));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+
             }
-
-        }
-
-        if ("all".equals(type)) {
             request.setAttribute("type", null);
-        } else {
-            try {
-                request.setAttribute("type", pdao.getFoodTypeId(type));
-            } catch (SQLException ex) {
-                Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
-            }finally {
-                page = "AdminPage/ListFood.jsp";
-            }
-//            request.getRequestDispatcher("/AdminPage/ListFood.jsp").forward(request, response);
-
+            request.getRequestDispatcher("ManageFood?link=ListFood.jsp").forward(request, response);
         }
-        RequestDispatcher dd = request.getRequestDispatcher(page);
-        dd.forward(request, response);
     }
 
     /**
@@ -165,7 +164,7 @@ public class ManageFood extends HttpServlet {
                     } catch (SQLException ex) {
                         Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    request.getRequestDispatcher("/AdminPage/ListFood.jsp").forward(request, response);
+                    request.getRequestDispatcher("./AdminPage/ListFood.jsp").forward(request, response);
                 }
                 break;
             case "updatetypefood":
@@ -183,7 +182,7 @@ public class ManageFood extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.sendRedirect("AdminPage/ListFoodType.jsp");
+                request.getRequestDispatcher("./AdminPage/ListFoodType.jsp").forward(request, response);
                 break;
 
             case "addtype":
@@ -199,7 +198,7 @@ public class ManageFood extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.sendRedirect("AdminPage/ListFoodType.jsp");
+                request.getRequestDispatcher("AdminPage/ListFoodType.jsp").forward(request, response);;
                 break;
             default: {
                 try {

@@ -87,7 +87,8 @@
                     </thead>
                     <tbody>
                         <c:set var="type" value="${requestScope.type}"/>
-                        <c:if test="${type == null}">
+                        
+                        <c:if test="${type == null || type == ''}">
                             <c:forEach var="pt" items="${db.listAllFood}">
                                 <tr>
                                     <td>${pt.name}</td>

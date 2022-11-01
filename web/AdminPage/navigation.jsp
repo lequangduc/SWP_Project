@@ -58,6 +58,7 @@
 
                             </li>
                         </div>
+                        
                         <li class="active"><button style="border:none" class="sidebar-header" data-toggle="collapse" data-target="#toolcomponent">
                             Manage Food
                         </button></li>
@@ -69,12 +70,12 @@
                             </li>
                             <div id="subcomponent1" class="collapse">
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link" href="./AddFoodType.jsp">
+                                    <a class="sidebar-link" href="ManageFood?link=AddFoodType.jsp">
                                          <span class="align-middle subtype">&nbsp + Add Category</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link" href = "./ListFoodType.jsp">
+                                    <a class="sidebar-link" href = "ManageFood?link=ListFoodType.jsp">
                                         </re> <span class="align-middle subtype">&nbsp + Category List</span>
                                     </a>
                                 </li>
@@ -87,12 +88,12 @@
                             </li>
                             <div id="subcomponent2" class="collapse">
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link" href = "./AddFoodPage.jsp">
+                                    <a class="sidebar-link" href = "ManageFood?link=AddFoodPage.jsp">
                                          <span class="align-middle subtype">&nbsp + Add Food</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link" href="./ListFood.jsp">
+                                    <a class="sidebar-link" href="ManageFood?link=ListFood.jsp">
                                          <span class="align-middle subtype">&nbsp + Food List</span>
                                     </a>
                                 </li>
