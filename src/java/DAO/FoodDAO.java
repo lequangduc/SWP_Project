@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DBContext.DBContext;
+import Context.DBContext;
 
 import entity.Food;
 import entity.FoodType;
@@ -127,7 +127,7 @@ public class FoodDAO {
             String sql = "INSERT INTO food values(?,?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
-//            ps.setInt(1, f.getFood_id());
+            // ps.setInt(1, f.getFood_id());
             ps.setString(1, f.getName());
             ps.setFloat(2, f.getPrice());
             ps.setInt(3, f.getFoodtype_id());
