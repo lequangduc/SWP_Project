@@ -60,6 +60,12 @@ create table rating(
 	comment nvarchar(2000) not null
 )
 
+CREATE TABLE data (
+ id int NOT NULL IDENTITY(10,1),
+ image VARBINARY(MAX) NOT NULL,
+ PRIMARY KEY (id)
+)
+
 SELECT * from food
 select SP.food_id,SP.name,SP.price,SP.foodtype_id,SP.fooddescription,SP.foodimage
 from ( select *, ROW_NUMBER() over (order by food_id) as rownumber 
