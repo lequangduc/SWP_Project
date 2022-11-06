@@ -212,7 +212,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- create modal to view table -->
+                <!-- if message is successful show map thet have been uploaded -->
+                
+
 
                 
 
