@@ -16,7 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.AccountDAO;
+import DAO.TableReservationDAO;
 import entity.Account;
+import entity.Table;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -106,8 +109,35 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("userLogin", a.getName());
             session.setAttribute("loggedAccount", a);
+            TableReservationDAO tdao = new TableReservationDAO();
+            ArrayList<Table> tables = tdao.getTables();
+            request.setAttribute("tablesTotal", tables.size());
+
+            int available = 0;
+            int reserved = 0;
+            int occupied = 0;
+            for (int i = 0; i < tables.size(); i++) {
+                if (tables.get(i).getStatus().equalsIgnoreCase("available")) {
+                    available += 1;
+                }
+
+                if (tables.get(i).getStatus().equalsIgnoreCase("occupied")) {
+                    occupied += 1;
+                }
+
+                if (tables.get(i).getStatus().equalsIgnoreCase("reserved")) {
+                    reserved += 1;
+                }
+
+            }
+
+            request.setAttribute("availableTables", available);
+            request.setAttribute("reservedTables", reserved);
+            request.setAttribute("occupiedTables", occupied);
             if (a.getRole_id() == 1) {
+
                 request.getRequestDispatcher("AdminPage/index.jsp").forward(request, response);
+
             } else if (a.getRole_id() == 2) {
                 request.getRequestDispatcher("CashierHomePage.jsp").forward(request, response);
             } else {

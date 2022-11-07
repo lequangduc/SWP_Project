@@ -41,8 +41,20 @@
         <servlet-class>controller.CashierController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>controller.BookingServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>TableMapServlet</servlet-name>
         <servlet-class>controller.TableMapServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelBillController</servlet-name>
+        <servlet-class>controller.CancelBillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TableReservationServlet</servlet-name>
+        <servlet-class>controller.TableReservationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -81,13 +93,24 @@
         <url-pattern>/ManageFood</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>CashierController</servlet-name>
         <url-pattern>/CashierController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TableMapServlet</servlet-name>
         <url-pattern>/TableMapServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TableReservationServlet</servlet-name>
+        <url-pattern>/TableReservationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/BookingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelBillController</servlet-name>
+        <url-pattern>/CancelBillController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

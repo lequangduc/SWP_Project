@@ -4,23 +4,26 @@
  */
 package controller;
 
+import DAO.TableReservationDAO;
+import entity.Table;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
-import DAO.TableReservationDAO;
-import entity.Table;
+import java.io.OutputStream;
+import com.google.gson.Gson;
 
 /**
  *
- * @author LENOVO
+ * @author Admin
  */
-public class HomeServlet extends HttpServlet {
+public class TableReservationServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,37 +36,24 @@ public class HomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        // dùng cho jquery
 
-            TableReservationDAO tdao = new TableReservationDAO();
-            ArrayList<Table> tables = tdao.getTables();
-            request.setAttribute("tablesTotal", tables.size());
+        // Get cái id mà jquery đã truyền
+        String id = request.getParameter("type_ID");
 
-            int available = 0;
-            int reserved = 0;
-            int occupied = 0;
-            for (int i = 0; i < tables.size(); i++) {
-                if (tables.get(i).getStatus().equalsIgnoreCase("available")) {
-                    available += 1;
-                }
+        TableReservationDAO dao = new TableReservationDAO();
 
-                if (tables.get(i).getStatus().equalsIgnoreCase("occupied")) {
-                    occupied += 1;
-                }
+        // Lấy danh sách bàn có cùng type_id
+        ArrayList<Table> list = dao.getTablesBy(id);
 
-                if (tables.get(i).getStatus().equalsIgnoreCase("reserved")) {
-                    reserved += 1;
-                }
+        // Set servlet này là 1 json
+        response.setContentType("application/json");
 
-            }
-
-            request.setAttribute("availableTables", available);
-            request.setAttribute("reservedTables", reserved);
-            request.setAttribute("occupiedTables", occupied);
-
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
+        // Chuyển đổi list thành 1 json
+        OutputStream outputStream = response.getOutputStream();
+        Gson gson = new Gson();
+        outputStream.write(gson.toJson(list).getBytes());
+        outputStream.flush();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the

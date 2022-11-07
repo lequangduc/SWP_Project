@@ -3,6 +3,11 @@
     Created on : Sep 29, 2022, 8:38:12 PM
     Author     : admin
 --%>
+<%@page import="DAO.ReservationDAO"%>
+<%@page import="DAO.TableTypeDAO"%>
+<%@page import="entity.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DAO.TableReservationDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -94,7 +99,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <nav
                 class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0"
                 >
-                <a href="" class="navbar-brand p-0">
+                <a href="HomeServlet" class="navbar-brand p-0">
                     <h1 class="text-primary m-0">
                         <i class="fa fa-utensils me-3"></i>Restoran
                     </h1>
@@ -110,7 +115,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
-                        <a href="index.jsp" class="nav-item nav-link active">Home</a>
+                        <a href="HomeServlet" class="nav-item nav-link active">Home</a>
                         <a href="about.jsp" class="nav-item nav-link">About</a>
                         <a href="service.jsp" class="nav-item nav-link">Service</a>
                         <a href="menu.jsp" class="nav-item nav-link">Menu</a>
@@ -131,7 +136,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </div>
                         <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
+                    <a href="${request.contextPath}/SWP_Project/BookingServlet" class="btn btn-primary py-2 px-4">Book A Table</a>
                     <%String loginUser = (String) session.getAttribute("userLogin");
                     if (loginUser == null) {%>
                     <button class="btn">
@@ -163,6 +168,59 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <%}%>
                 </div>
             </nav>
+            <div class="modal fade" id="bill-modal" tabindex="-1" aria-labelledby="modal-title" aria-hiden="true" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-title">View more table</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <table id="table_id" class="stripe hover order-column">
+                                <thead>
+                                    <tr>
+                                        <th>Reservation ID</th>
+                                        <th>Table Number</th>
+                                        <th>Date</th>
+                                        <th>Amount Of People</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <% Account acc = (Account) session.getAttribute("loggedAccount");
+                                        ReservationDAO dao = new ReservationDAO();
+                                        if (acc != null) {
+
+                                            ArrayList<Reservation> list = dao.getCusReservation(acc.getAccount_id());
+
+                                            for (int i = 0; i < list.size(); i++) {%>
+                                    <tr id="clear">
+                                        <td id="rid"><%=list.get(i).getReservation_id()%></td>
+                                        <td id="tid"><%=list.get(i).getTable_id()%></td>
+                                        <td><%=list.get(i).getDateReservation()%></td>
+                                        <td><%=list.get(i).getNoPeople()%></td>
+                                        <td>
+                                            <button class="btn btn-primary" id="remove">
+                                                <i class="bi bi-x"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class=" modal-footer ">
+                            <button type="button " class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
                 <%-- UpdateModal --%>
             <div id="UpdateModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-lg" role="content">
@@ -562,7 +620,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 
                             </p>
                             <a
-                                href=""
+                                href="${request.contextPath}/SWP_Project/BookingServlet"
                                 class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft"
                                 >Book A Table</a
                             >
@@ -677,10 +735,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <i class="fa fa-utensils text-primary me-2"></i>Restoran
                         </h1>
                         <p class="mb-4">
-                            
+                            Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
+                            Aliqu diam amet diam et eos erat ipsum et lorem et sit, sed stet
+                            lorem sit.
                         </p>
                         <p class="mb-4">
-                            
+                            Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
+                            Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit,
+                            sed stet lorem sit clita duo justo magna dolore erat amet
                         </p>
                         <div class="row g-4 mb-4">
                             <div class="col-sm-6">
@@ -691,7 +753,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                         class="flex-shrink-0 display-5 text-primary mb-0"
                                         data-toggle="counter-up"
                                         >
-                                        30
+                                        ${tablesTotal}
                                     </h1>
                                     <div class="ps-4">
                                         <p class="mb-0">Years of</p>
@@ -707,16 +769,97 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                         class="flex-shrink-0 display-5 text-primary mb-0"
                                         data-toggle="counter-up"
                                         >
-                                        50
+                                        {availableTables}
                                     </h1>
                                     <div class="ps-4">
-                                        <p class="mb-0">Popular</p>
-                                        <h6 class="text-uppercase mb-0">Master Chefs</h6>
+                                        <p class="mb-0">Available</p>
+                                        <h6 class="text-uppercase mb-0">Table</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div
+                                    class="d-flex align-items-center border-start border-5 border-primary px-3"
+                                    >
+                                    <h1
+                                        class="flex-shrink-0 display-5 text-primary mb-0"
+                                        data-toggle="counter-up"
+                                        >
+                                        ${reservedTables}
+                                    </h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Reserved</p>
+                                        <h6 class="text-uppercase mb-0">Table</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div
+                                    class="d-flex align-items-center border-start border-5 border-primary px-3"
+                                    >
+                                    <h1
+                                        class="flex-shrink-0 display-5 text-primary mb-0"
+                                        data-toggle="counter-up"
+                                        >
+                                        ${occupiedTables}
+                                    </h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Occupied</p>
+                                        <h6 class="text-uppercase mb-0">Table</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">
+                            View More
+                        </button>
+                        <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hiden="true" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-title">View more table</h5>
+                                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <table id="table_id1" class="stripe hover compact order-column">
+                                            <thead>
+                                                <tr>
+                                                    <th>Table no.</th>
+                                                    <th>Type of table</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <%
+                                                TableReservationDAO tdao = new TableReservationDAO();
+                                                ArrayList<Table> tables = tdao.getTables();
+                                                TableTypeDAO ttdao = new TableTypeDAO();
+                                                ArrayList<TableType> tts = ttdao.getAllListType();
+                                            %>
+                                            <tbody>
+
+                                                <%for (int i = 0;
+                                                            i < tables.size();
+                                                            i++) {%>
+                                                <tr>
+                                                    <td><%=tables.get(i).getTableID()%></td>
+                                                    <td><%=tables.get(i).getTabletypeID()%></td>
+                                                    <td><%=tables.get(i).getStatus()%></td>
+                                                </tr>
+                                                <%}%>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class=" modal-footer ">
+                                        <button type="button " class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1805,6 +1948,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             $('#UpdateModal').modal('show');
             alert("${UpdateError}");
             }
+            console.log("duc loz");
         });
     </script>
     <script name="validateLogin&Register" class="text/javascript">
@@ -1904,6 +2048,61 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             document.updateform.submit(); // fire submit event
         }
         }
+    </script>
+    <script>
+        const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+        $(document).ready(function () {
+            $('#table_id1').DataTable();
+        });
+    </script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!--Datatable jquery-->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <!--Delete Reservation-->
+    <script>
+        $(document).ready(function () {
+            // Dùng event click button có id là remove
+            $('#remove').click(function ()
+            {
+
+                // khi click thì sẽ lấy text của các id rid và tid
+                // rid là reservation ID - tid là table ID
+                var rid = $("#rid").text();
+                var tid = $("#tid").text();
+
+                $.ajax({
+                    url: 'CancelBill', //đường dẫn của cái servlet hủy bill
+                    type: 'GET',
+                    data: {
+                        // truyền 2 giá trị qua url xử lý hủy đơn và cập nhật trạng thái của bàn
+                        "rid": rid,
+                        "tid": tid
+                    },
+                    error: function ()
+                    {
+                        console.log("error");
+                    },
+                    success: function (data) //đoạn này ko dùng thì có thể để yên
+                    {
+
+                    }
+                });
+                $("#clear").remove();
+            });
+        });
     </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

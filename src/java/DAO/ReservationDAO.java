@@ -50,6 +50,34 @@ public class ReservationDAO {
         return false;
     }
 
+    public boolean checkAddFoodType(Reservation re) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int rs = 0;
+        try {
+            String sql = "INSERT INTO reservation values(?,?,?)";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, re.getTable_id());
+            ps.setInt(2, re.getCustomer_id());
+            ps.setDate(3, (java.sql.Date) re.getDateReservation());
+            // ps.setInt(5, re.getNoPeople());
+
+            rs = ps.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+
+            ps.close();
+            conn.close();
+        }
+        return false;
+    }
+
     public String getStatus(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -276,6 +304,66 @@ public class ReservationDAO {
             conn.close();
         }
         return false;
+    }
+
+    public ArrayList<Reservation> getAllReservation() {
+        String sql = "Select * from Reservation";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<Reservation> list = new ArrayList<Reservation>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Reservation(
+                        rs.getInt(1), rs.getInt(2),
+                        rs.getInt(3), rs.getDate(4),
+                        rs.getInt(5)));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    public ArrayList<Reservation> getCusReservation(int id) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "Select * from Reservation where customer_id = ?";
+        ArrayList<Reservation> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Reservation(
+                        rs.getInt(1), rs.getInt(2),
+                        rs.getInt(3), rs.getDate(4)));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    public void DeleteReseravation(int id) {
+        String query = "delete from reservation where reservation_id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

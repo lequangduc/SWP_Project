@@ -4,66 +4,40 @@
  */
 package controller;
 
+import DAO.ReservationDAO;
+import DAO.TableReservationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.TableReservationDAO;
-import entity.Table;
-
 /**
  *
- * @author LENOVO
+ * @author lenovo
  */
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "CancelBill", urlPatterns = { "/CancelBill" })
+public class CancelBillController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request  servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
 
-            TableReservationDAO tdao = new TableReservationDAO();
-            ArrayList<Table> tables = tdao.getTables();
-            request.setAttribute("tablesTotal", tables.size());
+        // Lấy ID của reseration muốn xóa
+        int rid = Integer.parseInt(request.getParameter("rid"));
+        // Lấy ID bàn trong Reservation để chuyển trạng thái bàn
+        int tid = Integer.parseInt(request.getParameter("tid"));
 
-            int available = 0;
-            int reserved = 0;
-            int occupied = 0;
-            for (int i = 0; i < tables.size(); i++) {
-                if (tables.get(i).getStatus().equalsIgnoreCase("available")) {
-                    available += 1;
-                }
+        ReservationDAO dao = new ReservationDAO();
+        TableReservationDAO tdao = new TableReservationDAO();
+        // Nếu hủy đơn thì trạng thái bàn sẽ chuyển về reserved thành available
+        tdao.updateTable(tid, "available");
+        // Xóa cứng hóa đơn
+        dao.DeleteReseravation(rid);
 
-                if (tables.get(i).getStatus().equalsIgnoreCase("occupied")) {
-                    occupied += 1;
-                }
-
-                if (tables.get(i).getStatus().equalsIgnoreCase("reserved")) {
-                    reserved += 1;
-                }
-
-            }
-
-            request.setAttribute("availableTables", available);
-            request.setAttribute("reservedTables", reserved);
-            request.setAttribute("occupiedTables", occupied);
-
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
