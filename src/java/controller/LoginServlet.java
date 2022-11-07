@@ -106,7 +106,13 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("userLogin", a.getName());
             session.setAttribute("loggedAccount", a);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            if (a.getRole_id() == 1) {
+                request.getRequestDispatcher("AdminPage/index.jsp").forward(request, response);
+            } else if (a.getRole_id() == 2) {
+                request.getRequestDispatcher("CashierHomePage.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
         } else {
             request.setAttribute("LoginError", "Login failed");
             request.getRequestDispatcher("index.jsp").forward(request, response);

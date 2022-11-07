@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import DAO.TableDAO;
-import DBContext.DBContext;
+import Context.DBContext;
 import entity.Table;
 import entity.TableDetail;
 import entity.TableType;

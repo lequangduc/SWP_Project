@@ -4,8 +4,7 @@
  */
 package DAO;
 
-
-import DBContext.DBContext;
+import Context.DBContext;
 import entity.Reservation;
 import entity.Reservation_details;
 import java.sql.Connection;
@@ -93,7 +92,7 @@ public class ReservationDAO {
 
     }
 
-     public Long NextReservation(int id) throws SQLException {
+    public Long NextReservation(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -125,7 +124,7 @@ public class ReservationDAO {
                     e.printStackTrace();
                 }
 
-                long diff = d2.getTime() - d1.getTime();//as given
+                long diff = d2.getTime() - d1.getTime();// as given
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(diff) % 60;
@@ -220,6 +219,7 @@ public class ReservationDAO {
         }
         return null;
     }
+
     public ArrayList<Reservation_details> getReservationDetailByID(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -237,7 +237,7 @@ public class ReservationDAO {
                 int reservation_id = rs.getInt(1);
                 int food_id = rs.getInt(2);
                 int quantity = rs.getInt(3);
-                Reservation_details res = new Reservation_details(reservation_id,food_id,quantity);
+                Reservation_details res = new Reservation_details(reservation_id, food_id, quantity);
                 list.add(res);
             }
             return list;
@@ -252,6 +252,7 @@ public class ReservationDAO {
         return null;
 
     }
+
     public boolean addOrder(Reservation_details re) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;

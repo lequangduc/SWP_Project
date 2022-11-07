@@ -37,13 +37,12 @@
         <servlet-class>controller.ManageFood</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>CashierController</servlet-name>
         <servlet-class>controller.CashierController</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>TableMapServlet</servlet-name>
         <servlet-class>controller.TableMapServlet</servlet-class>
->>>>>>> 9b6c39d0b0191db10d028ae8b2ad3e16762e66d6
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -82,13 +81,13 @@
         <url-pattern>/ManageFood</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
+
         <servlet-name>CashierController</servlet-name>
         <url-pattern>/CashierController</url-pattern>
-=======
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>TableMapServlet</servlet-name>
         <url-pattern>/TableMapServlet</url-pattern>
->>>>>>> 9b6c39d0b0191db10d028ae8b2ad3e16762e66d6
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,6 +1,6 @@
 package DAO;
 
-import DBContext.DBContext;
+import Context.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -166,8 +166,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <%-- UpdateModal --%>
             <div id="UpdateModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-lg" role="content">
-                    <!--Register Modal content-->
-
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 class="modal-title">Update Account</h3>
@@ -300,8 +298,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             class="form-control"
                                             id="name"
                                             name="name"
-                                            placeholder=${loggedAccount.name}
-                                            value=${loggedAccount.name}
+                                            placeholder=${userLogin}
+                                            value=${userLogin}
                                             />
                                     </div>
                                     <div class="col-12 col-md-4">

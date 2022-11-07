@@ -157,20 +157,214 @@
                                 </a>
 
                                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                    <img src="${request.contextPath}/SWP_Project/AdminPage/img/avatars/adminava.jpg" class="avatar img-fluid rounded me-1"/> <span class="text-dark">Administrator</span>
+                                    <img src="${request.contextPath}/SWP_Project/AdminPage/img/avatars/adminava.jpg" class="avatar img-fluid rounded me-1"/> <span class="text-dark">${userLogin}</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-                                    <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-                                    <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UpdateModal"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
                                     <a class="dropdown-item" href="${request.contextPath}/SWP_Project/LoginServlet">Log out</a>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </nav>
+                <div id="UpdateModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg" role="content">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Update Account</h3>
+
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form name="updateform" action="ManageProfileServlet" method="post" onSubmit="return validateUpdateForm(event);"
+                                  oninput='RePassword.setCustomValidity(RePassword.value != password.value ? "Passwords do not match." : "")'>
+                                <input type="hidden" name="id" value=${loggedAccount.account_id}>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Username</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="userName"
+                                            name="userName"
+                                            placeholder=${loggedAccount.username}
+                                            value=${loggedAccount.username}
+                                            />
+                                        
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="unameErr">
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Password</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            placeholder=${loggedAccount.password}
+                                            value=${loggedAccount.password}
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="passwordErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Confirm Password</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="RePassword"
+                                            class="form-control"
+                                            id="RePassword"
+                                            name="RePassword"
+                                            placeholder="Please re-enter password"
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="RePasswordErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Email</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="email"
+                                            name="email"
+                                            placeholder=${loggedAccount.email}
+                                            value=${loggedAccount.email}
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="emailErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Phone</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="phone"
+                                            name="phone"
+                                            placeholder="Please enter 10 digits"
+                                            value=${loggedAccount.phone}
+                                            />
+
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="phoneErr">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        for=""
+                                        class="col-12 col-md-3 col-form-label"
+                                        >Name</label
+                                    >
+
+                                    <div class="col-12 col-md-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            name="name"
+                                            placeholder=${loggedAccount.name}
+                                            value=${loggedAccount.name}
+                                            />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                      <span style="color:red" id="nameErr">
+                                    </div>
+                                </div>
+
+                                <div class="form-row mt-4">
+                                    <div class="offset-md-4 col-md-10">
+                                        <button type="submit" class="btn btn-primary btn-sm ml-1">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </body>
+    <script>
+    function validateUpdateForm(event) {
+            event.preventDefault(); // this will prevent the submit event.
+        if (document.updateform.userName.value == "") {
+            //alert("User Name can not be left blank");
+            document.updateform.userName.focus();
+            document.getElementById("unameErr").textContent =
+            "*User name can not be left blank";
+            return false;
+        } else if (document.updateform.password.value == "") {
+            //alert("Password can not be left blank");
+            document.updateform.password.focus();
+            document.getElementById("passwordErr").textContent =
+            "*Password can not be left blank";
+            return false;
+        } else if (document.updateform.email.value == "") {
+            //alert("Email can not be left blank");
+            document.updateform.email.focus();
+            document.getElementById("emailErr").textContent =
+            "*Email can not be left blank";
+            return false;
+        } else if (document.updateform.phone.value == "") {
+            //alert("Phone can not be left blank");
+            document.updateform.phone.focus();
+            document.getElementById("phoneErr").textContent =
+            "*Phone can not be left blank";
+            return false;
+        } else if (document.updateform.name.value == "") {
+            //alert("Name can not be left blank");
+            document.updateform.name.focus();
+            document.getElementById("nameErr").textContent =
+            "*Name can not be left blank";
+            return false;
+        }else if (document.updateform.RePassword.value == "") {
+            document.updateform.RePassword.focus();
+            document.getElementById("RePasswordErr").textContent =
+            "*this fields can not be left blank";
+            return false;
+        }
+         else {
+            document.updateform.submit(); // fire submit event
+        }
+        }
+    </script>
 </html>
