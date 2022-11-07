@@ -1,5 +1,6 @@
 
 build
+nbproject
 nbproject/private
 src/java/Context/DBContext.java
 /dist/
