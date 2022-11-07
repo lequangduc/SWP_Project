@@ -5,8 +5,10 @@
 package controller;
 
 import DAO.FoodDAO;
+import DAO.ReservationDAO;
 import entity.Food;
 import entity.FoodType;
+import entity.Reservation_details;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -69,14 +71,14 @@ public class ManageFood extends HttpServlet {
         } else {
             String type = request.getParameter("type");
             String id = request.getParameter("id");
-
+            
             if (type.equals("deletetypefood")) {
                 String idtype = request.getParameter("idtype");
-
+                
                 try {
                     if (pdao.countDish(Integer.parseInt(idtype)) > 0) {
                         request.setAttribute("Status", "Update Failed");
-
+                        
                     } else {
                         boolean deleted = pdao.deleteFoodType(Integer.parseInt(idtype));
                         if (deleted) {
@@ -89,9 +91,9 @@ public class ManageFood extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                
             }
-
+            
             if (type.equals("delete")) {
                 boolean status = false;
                 try {
@@ -106,7 +108,7 @@ public class ManageFood extends HttpServlet {
                 }
                 
             }
-
+            
             if ("all".equals(type)) {
                 request.setAttribute("type", null);
             } else {
@@ -116,7 +118,6 @@ public class ManageFood extends HttpServlet {
                     Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-
             }
             request.setAttribute("type", null);
             request.getRequestDispatcher("ManageFood?link=ListFood.jsp").forward(request, response);
@@ -160,7 +161,7 @@ public class ManageFood extends HttpServlet {
                         } else {
                             request.setAttribute("Status", "Update Failed");
                         }
-
+                        
                     } catch (SQLException ex) {
                         Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -184,7 +185,7 @@ public class ManageFood extends HttpServlet {
                 }
                 request.getRequestDispatcher("./AdminPage/ListFoodType.jsp").forward(request, response);
                 break;
-
+            
             case "addtype":
                 String nametype = request.getParameter("typename");
                 boolean added;
@@ -198,8 +199,10 @@ public class ManageFood extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                request.getRequestDispatcher("AdminPage/ListFoodType.jsp").forward(request, response);;
+                request.getRequestDispatcher("AdminPage/ListFoodType.jsp").forward(request, response);
+                ;
                 break;
+            
             default: {
                 try {
                     throw new Exception();

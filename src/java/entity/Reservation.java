@@ -4,8 +4,10 @@
  */
 package entity;
 
+import java.text.ParseException;
 import java.util.Date;
-
+import java.util.logging.Level;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author LENOVO
@@ -28,7 +30,13 @@ public class Reservation {
         this.customer_id = customer_id;
         this.dateReservation = dateReservation;
     }
-    
+    public Reservation(int reservation_id, int table_id, int customer_id, String dateReservation) throws ParseException {
+        this.reservation_id = reservation_id;
+        this.table_id = table_id;
+        this.customer_id = customer_id;
+        setDob(dateReservation);
+    }
+
     public int getReservation_id() {
         return reservation_id;
     }
@@ -60,5 +68,10 @@ public class Reservation {
     public void setDateReservation(Date dateReservation) {
         this.dateReservation = dateReservation;
     }
-    
+    public void setDob(String dob) throws ParseException {
+         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+         this.dateReservation = format.parse(dob);
+    }
+
 }

@@ -14,7 +14,7 @@ public class TableDAO {
     public static PreparedStatement ps = null;
     public static ResultSet rs = null;
 
-    public static ArrayList<Table> getAllTable() {
+    public ArrayList<Table> getAllTable() {
         ArrayList<Table> list = new ArrayList<>();
         String query = "SELECT * FROM [tables]";
         try {

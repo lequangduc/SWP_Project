@@ -204,4 +204,36 @@ public class AccountDAO implements Serializable {
         }
         return a;
     }
+    public Account getAccountByID(int iduser) throws SQLException{
+         Account a = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from account \n"
+                    + "where account_id = ?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, iduser);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("account_id");
+                String name = rs.getString("name").trim();
+                String phone = rs.getString("phone").trim();
+                String email = rs.getString("email").trim();
+                String username = rs.getString("username").trim();
+                String password = rs.getString("password").trim();
+                int role_id = rs.getInt("role_id");
+
+                a = new Account(id, name, phone, email, username, password, role_id);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            rs.close();
+            ps.close();
+            conn.close();
+        }
+        return a;
+    }
 }

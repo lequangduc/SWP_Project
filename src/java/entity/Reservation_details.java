@@ -13,6 +13,9 @@ public class Reservation_details {
     private int food_id;
     private int quantity;
 
+    public Reservation_details() {
+    }
+
     public Reservation_details(int reservation_id, int food_id, int quantity) {
         this.reservation_id = reservation_id;
         this.food_id = food_id;
