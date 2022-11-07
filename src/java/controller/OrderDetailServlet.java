@@ -6,6 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -13,14 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.TableReservationDAO;
-import entity.Table;
+import DAO.ReservationDAO;
 
 /**
  *
  * @author LENOVO
  */
-public class HomeServlet extends HttpServlet {
+public class OrderDetailServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,34 +35,16 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            TableReservationDAO tdao = new TableReservationDAO();
-            ArrayList<Table> tables = tdao.getTables();
-            request.setAttribute("tablesTotal", tables.size());
-
-            int available = 0;
-            int reserved = 0;
-            int occupied = 0;
-            for (int i = 0; i < tables.size(); i++) {
-                if (tables.get(i).getStatus().equalsIgnoreCase("available")) {
-                    available += 1;
-                }
-
-                if (tables.get(i).getStatus().equalsIgnoreCase("occupied")) {
-                    occupied += 1;
-                }
-
-                if (tables.get(i).getStatus().equalsIgnoreCase("reserved")) {
-                    reserved += 1;
-                }
-
-            }
-
-            request.setAttribute("availableTables", available);
-            request.setAttribute("reservedTables", reserved);
-            request.setAttribute("occupiedTables", occupied);
-
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet OrderDetailServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet OrderDetailServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -93,7 +75,6 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
