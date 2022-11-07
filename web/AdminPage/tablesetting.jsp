@@ -153,7 +153,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body  ">
-                                    <form action="TableMapServlet" method="post" enctype="multipart/form-data">
+                                    <form action="${request.contextPath}/SWP_Project/TableMapServlet" method="post" enctype="multipart/form-data">
                                         <div class="form-group  ">
                                             <label for="file">File</label>
                                             <input type="file" class="form-control" id="file" name="table-map">
@@ -183,7 +183,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <!-- button to view the map in modal -->
-                        <a href="TableMapServlet?action=viewTableMap" target="_blank" class="btn btn-primary" >
+                        <a href="${request.contextPath}/SWP_Project/TableMapServlet?action=viewTableMap" target="_blank" class="btn btn-primary" >
                             View Map
                         </a>
 

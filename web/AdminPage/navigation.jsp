@@ -70,12 +70,12 @@
                             </li>
                             <div id="subcomponent1" class="collapse">
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link" href="ManageFood?link=AddFoodType.jsp">
+                                    <a class="sidebar-link" href="${request.contextPath}/SWP_Project/ManageFood?link=AddFoodType.jsp">
                                          <span class="align-middle subtype">&nbsp + Add Category</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link" href = "ManageFood?link=ListFoodType.jsp">
+                                    <a class="sidebar-link" href = "${request.contextPath}/SWP_Project/ManageFood?link=ListFoodType.jsp">
                                         </re> <span class="align-middle subtype">&nbsp + Category List</span>
                                     </a>
                                 </li>
@@ -88,12 +88,12 @@
                             </li>
                             <div id="subcomponent2" class="collapse">
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link" href = "ManageFood?link=AddFoodPage.jsp">
+                                    <a class="sidebar-link" href = "${request.contextPath}/SWP_Project/ManageFood?link=AddFoodPage.jsp">
                                          <span class="align-middle subtype">&nbsp + Add Food</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item" >
-                                    <a class="sidebar-link" href="ManageFood?link=ListFood.jsp">
+                                    <a class="sidebar-link" href="${request.contextPath}/SWP_Project/ManageFood?link=ListFood.jsp">
                                          <span class="align-middle subtype">&nbsp + Food List</span>
                                     </a>
                                 </li>
@@ -108,13 +108,13 @@
                         </button></li>
                         <div id="tablecomponent" class="collapse">
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="TableServlet?action=managetablelist">
+                                <a class="sidebar-link" href="${request.contextPath}/SWP_Project/TableServlet?action=managetablelist">
                                      <span class="align-middle">Table List</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="TableServlet?action=settable">
+                                <a class="sidebar-link" href="${request.contextPath}/SWP_Project/TableServlet?action=settable">
                                     <span class="align-middle">Table Setting</span>
                                 </a>
                             </li>

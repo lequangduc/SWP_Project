@@ -85,7 +85,7 @@
                             <td>${types.idfoodtype}</td>
                             <td>${types.foodtypename}</td>
                             <td>${db.countDish(types.idfoodtype)}</td>
-                            <td><button><a href="UpdateFoodType.jsp?idtype=${types.idfoodtype}">Update</a></button></td>
+                            <td><button><a href="${request.contextPath}/SWP_Project/AdminPage/UpdateFoodType.jsp?idtype=${types.idfoodtype}">Update</a></button></td>
                             <c:if test="${db.countDish(types.idfoodtype) > 0}">
                                 <td><button onClick="alert('Cann\'t Delete This Type ')"><a href="#">Delete</a></button></td>
                             </c:if>

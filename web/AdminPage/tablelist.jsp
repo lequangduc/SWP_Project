@@ -40,7 +40,7 @@
                                     <h5 class="card-title mb-0">Search Table</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action="TableServlet?action=searchtable" method="post">
+                                    <form action="${request.contextPath}/SWP_Project/TableServlet?action=searchtable" method="post">
                                         <div class="row">
                                             <div class="col-md-6 col-xl-3">
                                                 <div class="form-group  mb-3">
@@ -104,7 +104,7 @@
                                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body  ">
-                                <form action="TableServlet?action=addtable" method="post">
+                                <form action="${request.contextPath}/SWP_Project/TableServlet?action=addtable" method="post">
                                     <div class="row">
                                         <div class="col-md-6 col-xl-6">
                                             <div class="form-group  mb-3">
@@ -148,7 +148,7 @@
                                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body  ">
-                                <form action="TableServlet?action=updatetable" method="post">
+                                <form action="${request.contextPath}/SWP_Project/TableServlet?action=updatetable" method="post">
                                     <div class="row">
                                         <div class="col-md-6 col-xl-6">
                                             <div class="form-group  mb-3">
@@ -194,7 +194,7 @@
                                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body  ">
-                                <form action="TableServlet?action=deletetable" method="post">
+                                <form action="${request.contextPath}/SWP_Project/TableServlet?action=deletetable" method="post">
                                     <div class="row">
                                         <div class="col-md-12 col-xl-12">
                                             <div class="form-group  mb-3">
