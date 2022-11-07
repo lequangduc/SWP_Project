@@ -9,7 +9,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="DBContext.DBContext"%>
+<%@page import="Context.DBContext"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="entity.TableDetail"%>
 <%@page import="java.util.ArrayList"%>
