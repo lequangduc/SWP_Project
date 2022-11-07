@@ -467,11 +467,17 @@
                                             <label for="datetime">Date & Time</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="number" min="1" class="form-control" id="people" placeholder="No of people" name="people" required>
                                             <label for="people">No of people</label>
                                         </div>
+                                    </div> -->
+                                    <!-- view table map button-->
+                                    <div class="col-md-6">
+                                        
+                                            <a href="TableMapServlet?action=viewTableMap" target="_blank" class="btn btn-primary form-floating" style="width:100%;height:auto;">View Table Map</a>
+                                        
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
