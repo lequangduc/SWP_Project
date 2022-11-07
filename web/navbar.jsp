@@ -6,12 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
+    
         <nav class="navbar navbar-expand navbar-light navbar-bg">
                     <a class="sidebar-toggle js-sidebar-toggle">
                         <i class="hamburger align-self-center"></i>
@@ -167,7 +169,56 @@
                         </ul>
                     </div>
                 </nav>
-                <div id="UpdateModal" class="modal fade" role="dialog">
+            
+    </body>  
+<script>
+    function validateUpdateForm(event) {
+            event.preventDefault(); // this will prevent the submit event.
+        if (document.updateform.userName.value == "") {
+            //alert("User Name can not be left blank");
+            document.updateform.userName.focus();
+            document.getElementById("unameErr").textContent =
+            "*User name can not be left blank";
+            return false;
+        } else if (document.updateform.password.value == "") {
+            //alert("Password can not be left blank");
+            document.updateform.password.focus();
+            document.getElementById("passwordErr").textContent =
+            "*Password can not be left blank";
+            return false;
+        } else if (document.updateform.email.value == "") {
+            //alert("Email can not be left blank");
+            document.updateform.email.focus();
+            document.getElementById("emailErr").textContent =
+            "*Email can not be left blank";
+            return false;
+        } else if (document.updateform.phone.value == "") {
+            //alert("Phone can not be left blank");
+            document.updateform.phone.focus();
+            document.getElementById("phoneErr").textContent =
+            "*Phone can not be left blank";
+            return false;
+        } else if (document.updateform.name.value == "") {
+            //alert("Name can not be left blank");
+            document.updateform.name.focus();
+            document.getElementById("nameErr").textContent =
+            "*Name can not be left blank";
+            return false;
+        }else if (document.updateform.RePassword.value == "") {
+            document.updateform.RePassword.focus();
+            document.getElementById("RePasswordErr").textContent =
+            "*this fields can not be left blank";
+            return false;
+        }
+         else {
+            document.updateform.submit(); // fire submit event
+        }
+        }
+    </script>
+    
+</html>
+
+    <div id="UpdateModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-lg" role="content">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -301,8 +352,8 @@
                                             class="form-control"
                                             id="name"
                                             name="name"
-                                            placeholder=${loggedAccount.name}
-                                            value=${loggedAccount.name}
+                                            placeholder=${userLogin}
+                                            value=${userLogin}
                                             />
                                     </div>
                                     <div class="col-12 col-md-4">
@@ -322,49 +373,3 @@
                     </div>
                 </div>
             </div>
-    </body>
-    <script>
-    function validateUpdateForm(event) {
-            event.preventDefault(); // this will prevent the submit event.
-        if (document.updateform.userName.value == "") {
-            //alert("User Name can not be left blank");
-            document.updateform.userName.focus();
-            document.getElementById("unameErr").textContent =
-            "*User name can not be left blank";
-            return false;
-        } else if (document.updateform.password.value == "") {
-            //alert("Password can not be left blank");
-            document.updateform.password.focus();
-            document.getElementById("passwordErr").textContent =
-            "*Password can not be left blank";
-            return false;
-        } else if (document.updateform.email.value == "") {
-            //alert("Email can not be left blank");
-            document.updateform.email.focus();
-            document.getElementById("emailErr").textContent =
-            "*Email can not be left blank";
-            return false;
-        } else if (document.updateform.phone.value == "") {
-            //alert("Phone can not be left blank");
-            document.updateform.phone.focus();
-            document.getElementById("phoneErr").textContent =
-            "*Phone can not be left blank";
-            return false;
-        } else if (document.updateform.name.value == "") {
-            //alert("Name can not be left blank");
-            document.updateform.name.focus();
-            document.getElementById("nameErr").textContent =
-            "*Name can not be left blank";
-            return false;
-        }else if (document.updateform.RePassword.value == "") {
-            document.updateform.RePassword.focus();
-            document.getElementById("RePasswordErr").textContent =
-            "*this fields can not be left blank";
-            return false;
-        }
-         else {
-            document.updateform.submit(); // fire submit event
-        }
-        }
-    </script>
-</html>

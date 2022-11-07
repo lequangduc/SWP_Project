@@ -82,6 +82,9 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                             Set Status
                         </button>
+                        <button class="btn btn-info" type="button" >
+                            <a href="CashierHomePage.jsp">Cashier Home Page</a>
+                        </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="CashierController?setstatus=available&id=${id}">Available</a>
                             <a class="dropdown-item" href="CashierController?setstatus=occupied&id=${id}">Occupied</a>
@@ -94,97 +97,148 @@
                             <h4>Next Reservation : ${dao.getNextReservationInfo(id)} </h4> 
                         </div>
                         <div class="underline"></div>
-                        <c:if test="${status == 'occupied'}">
-                            <c:set var="nowreservation" value="${dao.getReservation(id)}"/>
-                            <h3 style="text-align: center;margin: 2% 5%">Reservation Info</h3>
-                            <div style="margin-top:2%;padding-left: 5%">
-                                <h4>Reservation ID : ${nowreservation.reservation_id}</h4>
-                                <h4>Customer : ${accountdao.getAccountByID(nowreservation.customer_id).name} </h4>
-                            </div>
-
-                            <c:set var="order" value="${dao.getReservationDetailByID(nowreservation.reservation_id)}"/>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Number</th>
-                                        <th>Food</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                                <c:if test="${not empty order}">
-                                    <tbody>
-
-                                        <c:forEach var="eachorder" items="${order}">
-                                            <c:set var="c" value="${c+1}"/>
-                                            <tr>
-                                                <td>${c}</td>
-                                                <td>${fooddao.getFoodByID(eachorder.food_id).name}</td>
-                                                <td>${eachorder.quantity}</td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </c:if>
-                                <c:if test="${ empty order}">
-                                    <h4>Not have any order </h4>
-                                </c:if>
-                            </table>
+                        <c:if test="${status == 'available'}">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                Add new order
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">
+                                <a href="CashierController?action=addreservation&id=${id}">Add New Reservation</a>
                             </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add new order</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="${request.contextPath}/SWP_Project/CashierController" method="POST">
-                                                <input type="hidden" name="action" value="addneworder">
-                                                <input type="hidden" name="id" value="${id}">
-                                                <input type="hidden" name="idorder" value="${nowreservation.reservation_id}"/>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="food">Options</label>
+                            
+                        </c:if>
+                        <c:if test="${status == 'occupied'}">
+                            <c:set var="nowreservation" value="${dao.getReservation(id)}"/>
+                            <c:if test="${not empty nowreservation}">
+                                <h3 style="text-align: center;margin: 2% 5%">Reservation Info</h3>
+                                <div style="margin-top:2%;padding-left: 5%">
+                                    <h4>Reservation ID : ${nowreservation.reservation_id}</h4>
+                                    <h4>Customer : ${accountdao.getAccountByID(nowreservation.customer_id).name} </h4>
+                                </div>
+
+                                <c:set var="order" value="${dao.getListDetail(nowreservation.reservation_id)}"/>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Number</th>
+                                            <th>Food</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${not empty order}">
+                                        <tbody>
+
+                                            <c:forEach var="eachorder" items="${order}">
+                                                <c:set var="c" value="${c+1}"/>
+                                                <tr>
+                                                    <td>${c}</td>
+                                                    <td>${fooddao.getFoodByID(eachorder.food_id).name}</td>
+                                                    <td>${eachorder.quantity}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </c:if>
+                                    <c:if test="${ empty order}">
+                                        <h4>Not have any order </h4>
+                                    </c:if>
+                                </table>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Add new order
+                                </button>
+                                <button type="button" class="btn btn-primary" >
+                                    <a href="CashierController?setstatus=reserved&id=${id}"> Reserved</a>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Add new order</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="${request.contextPath}/SWP_Project/CashierController" method="POST">
+                                                    <input type="hidden" name="action" value="addneworder">
+                                                    <input type="hidden" name="id" value="${id}">
+                                                    <input type="hidden" name="idorder" value="${nowreservation.reservation_id}"/>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <label class="input-group-text" for="food">Options</label>
+                                                        </div>
+                                                        <select class="custom-select" id="food" name="food">
+                                                            <option selected>Choose...</option>
+                                                            <c:forEach var="food" items="${fooddao.listAllFood}">
+                                                                <option value="${food.food_id}">${food.name}</option>
+                                                            </c:forEach>
+                                                        </select>
+
                                                     </div>
-                                                    <select class="custom-select" id="food" name="food">
-                                                        <option selected>Choose...</option>
-                                                        <c:forEach var="food" items="${fooddao.listAllFood}">
-                                                            <option value="${food.food_id}">${food.name}</option>
+                                                    <div class="form-group">
+                                                        <label for="quantity">Quantity</label>
+                                                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity .. ">
+                                                    </div>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <input type="submit" class="btn btn-primary" value="Save changes"/>
+                                                </form>
 
-                                                        </c:forEach>
-                                                    </select>
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="quantity">Quantity</label>
-                                                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity .. ">
-                                                </div>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <input type="submit" class="btn btn-primary" value="Save changes"/>
-                                            </form>
+                                            </div>
 
                                         </div>
-
                                     </div>
                                 </div>
-                            </div>
-                        </c:if>
+                            </c:if>
 
+                        </c:if>
+                        <c:if test="${status == 'reserved'}">
+                            <c:set var="nowreservation" value="${dao.getReservation(id)}"/>
+                            <c:if test="${not empty nowreservation}">
+                                <c:set var="order" value="${dao.getListDetail(nowreservation.reservation_id)}"/>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Number</th>
+                                            <th>Food</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <c:if test="${not empty order}">
+                                        <tbody>
+
+                                            <c:forEach var="eachorder" items="${order}">
+                                                <c:set var="c" value="${c+1}"/>
+                                                <tr>
+                                                    <td>${c}</td>
+                                                    <td>${fooddao.getFoodByID(eachorder.food_id).name}</td>
+                                                    <td>${eachorder.quantity}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </c:if>
+                                    <c:if test="${ empty order}">
+                                        <h4>Not have any order </h4>
+                                    </c:if>
+                                </table>
+                                <button type="button" class="btn btn-primary" >
+                                    <a href="CashierController?setstatus=occupied&id=${id}"> Edit Order</a>
+                                </button>
+                                <button type="button" class="btn btn-danger" >
+                                    <a href="CashierController?action=bill&idbill=${nowreservation.reservation_id}&id=${id}">Print Bill</a>
+                                </button>
+                            </c:if>
+
+                        </c:if>
 
                     </div>
                 </div>
                 <!-- Button trigger modal -->
 
                     <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
-                            : request.getAttribute("errMessage")%></p>
-                    <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
-                        : request.getAttribute("Message")%></p>  
+                        : request.getAttribute("errMessage")%></p>
+                <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
+                            : request.getAttribute("Message")%></p>  
                     <%@include file="./footer.jsp"%>
             </div>
 

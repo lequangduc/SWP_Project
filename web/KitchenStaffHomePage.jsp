@@ -1,8 +1,9 @@
 <%-- 
-    Document   : CashierHomePage
-    Created on : Nov 2, 2022, 4:51:25 PM
+    Document   : KitchenStaffHomePage
+    Created on : Nov 7, 2022, 4:59:07 PM
     Author     : admin
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="DAO.TableDAO"%>
 <%@page import="DAO.ReservationDAO"%>
@@ -42,9 +43,6 @@
                 margin : 2em 1em;
 
             }
-            a{
-                color: #fff;
-            }
         </style>
 
 
@@ -60,7 +58,7 @@
         <jsp:useBean id="db" class="DAO.TableDAO" />
         <jsp:useBean id="dao" class="DAO.ReservationDAO" />
         <%! int tableid = 0;
-                                                 %>
+                                                                                                 %>
         <div class="wrapper">
             <%@include file="./navigation.jsp" %>
 
@@ -68,21 +66,49 @@
                 <%@include file="./navbar.jsp" %>
                 <div class="parts">
                     <c:forEach var="tb" items="${db.allTable}">
+                        <c:if test="${tb.status == 'occupied'}">
+                            <p>
 
-                        <div class="part ${db.getTableByID(tb.tableID).status}">
-                            Table - ${tb.tableID}
-                            
-                            <button  class="btn btn-secondary" type="button" >
-                                <a href="./TableReservationDetails.jsp?id=${tb.tableID}">View Detail</a>                
-                            </button>
-                        </div>
+                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#${tb.tableID}" aria-expanded="false" aria-controls="collapseExample">
+                                    Table ${tb.tableID}
+                                </button>
+                            </p>
+                            <div class="collapse" id="${tb.tableID}">
+                                <div class="card card-body">
+                                    <c:set var="nowreservation" value="${dao.getReservation(tb.tableID)}"/>
+                                    <c:set var="order" value="${dao.getListDetail(nowreservation.reservation_id)}"/>
+                                    <c:forEach var="eachorder" items="${order}">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Number</th>
+                                                    <th>Food</th>
+                                                    <th>Quantity</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <c:set var="c" value="${c+1}"/>
+                                                <tr>
+                                                    <td>${c}</td>
+                                                    <td>${fooddao.getFoodByID(eachorder.food_id).name}</td>
+                                                    <td>${eachorder.quantity}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </c:if>
+
                     </c:forEach>
                 </div>
                 <!-- Button trigger modal -->
 
-                <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
-                            : request.getAttribute("errMessage")%></p>
-                    <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
+                    <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
+                        : request.getAttribute("errMessage")%></p>
+                <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
                             : request.getAttribute("Message")%></p>  
                     <%@include file="./footer.jsp"%>
             </div>
@@ -93,8 +119,9 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-        
+
     </body>
 </html>
+
 
 

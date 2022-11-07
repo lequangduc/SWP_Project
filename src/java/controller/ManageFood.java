@@ -66,10 +66,11 @@ public class ManageFood extends HttpServlet {
             throws ServletException, IOException {
         FoodDAO pdao = new FoodDAO();
         String link = request.getParameter("link");
+        String type = request.getParameter("type");
         if (link != null) {
             request.getRequestDispatcher("./AdminPage/" + link).forward(request, response);
         } else {
-            String type = request.getParameter("type");
+            
             String id = request.getParameter("id");
             
             if (type.equals("deletetypefood")) {
@@ -119,7 +120,8 @@ public class ManageFood extends HttpServlet {
                 }
                 
             }
-            request.setAttribute("type", null);
+            
+            
             request.getRequestDispatcher("ManageFood?link=ListFood.jsp").forward(request, response);
         }
     }
