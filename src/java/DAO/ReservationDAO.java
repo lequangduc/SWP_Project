@@ -150,7 +150,7 @@ public class ReservationDAO {
             ps.close();
             conn.close();
         }
-        return null;
+        return (long) -10000;
     }
 
     public boolean setStatus(String status, int id) throws SQLException {
@@ -214,6 +214,9 @@ public class ReservationDAO {
     public Reservation getReservation(int id) throws SQLException {
 
         long seconds = NextReservation(id);
+        if (seconds != -10000) {
+            return null;
+        }
         if (seconds < 1800) {
             int reservation = nowReservation;
             return getReservationByID(reservation);
