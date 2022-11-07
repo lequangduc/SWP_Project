@@ -6,6 +6,9 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -17,6 +20,16 @@ import DAO.TableDAO;
 import entity.Table;
 import entity.TableDetail;
 import entity.TableType;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -32,22 +45,11 @@ public class TableServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
+     * @throws AWTException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, AWTException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TableServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TableServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
@@ -70,22 +72,23 @@ public class TableServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action.equals("managetablelist")) {
-            // for (Table table : tables) {
-            // for (TableType tableType : tableTypes) {
-            // if (table.getTabletypeID() == tableType.getTabletypeID()) {
-            // tableDetails.add(new TableDetail(table.getTableID(), table.getStatus(),
-            // tableType.getTabletypeName(), tableType.getCapacity()));
-            // }
-            // }
-            // }
-            // add typename
-            // for (TableType tableType : tableTypes) {
-            // tableTypeNames.add(tableType.getTabletypeName());
-            // }
             tableDetails = getTableList(tables, tableTypes);
             request.setAttribute("tableTypeName", tableTypeNames);
             request.setAttribute("tableList", tableDetails);
             request.getRequestDispatcher("/AdminPage/tablelist.jsp").forward(request, response);
+        } else if (action.equals("settable")) {
+
+            try {
+                processRequest(request, response);
+            } catch (AWTException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            tableDetails = getTableList(tables, tableTypes);
+            request.setAttribute("tableList", tableDetails);
+            request.getRequestDispatcher("/AdminPage/tablesetting.jsp").forward(request, response);
+
         }
 
     }

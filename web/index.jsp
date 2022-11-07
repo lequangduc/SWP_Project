@@ -124,9 +124,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <div class="dropdown-menu m-0">
                                 <a href="booking.jsp" class="dropdown-item">Booking</a>
                                 <a href="team.jsp" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.jsp" class="dropdown-item"
+                                <%-- <a href="testimonial.jsp" class="dropdown-item"
                                    >Testimonial</a
-                                >
+                                > --%>
                             </div>
                         </div>
                         <a href="contact.jsp" class="nav-item nav-link">Contact</a>
@@ -561,9 +561,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 Enjoy Our<br />Delicious Meal
                             </h1>
                             <p class="text-white animated slideInLeft mb-4 pb-2">
-                                Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
-                                Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit,
-                                sed stet lorem sit clita duo justo magna dolore erat amet
+                                
                             </p>
                             <a
                                 href=""
@@ -590,8 +588,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
                                 <h5>Master Chefs</h5>
                                 <p>
-                                    Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita
-                                    amet diam
+                                    30 years of experience in cooking
                                 </p>
                             </div>
                         </div>
@@ -602,8 +599,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <i class="fa fa-3x fa-utensils text-primary mb-4"></i>
                                 <h5>Quality Food</h5>
                                 <p>
-                                    Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita
-                                    amet diam
+                                    We use only the best ingredients
                                 </p>
                             </div>
                         </div>
@@ -612,10 +608,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <div class="service-item rounded pt-3">
                             <div class="p-4">
                                 <i class="fa fa-3x fa-cart-plus text-primary mb-4"></i>
-                                <h5>Online Order</h5>
+                                <h5>Online table reservation</h5>
                                 <p>
-                                    Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita
-                                    amet diam
+                                    Reserve your table before your arrival
                                 </p>
                             </div>
                         </div>
@@ -626,8 +621,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <i class="fa fa-3x fa-headset text-primary mb-4"></i>
                                 <h5>24/7 Service</h5>
                                 <p>
-                                    Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita
-                                    amet diam
+                                    We are always here to help you
                                 </p>
                             </div>
                         </div>
@@ -685,14 +679,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <i class="fa fa-utensils text-primary me-2"></i>Restoran
                         </h1>
                         <p class="mb-4">
-                            Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
-                            Aliqu diam amet diam et eos erat ipsum et lorem et sit, sed stet
-                            lorem sit.
+                            
                         </p>
                         <p class="mb-4">
-                            Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
-                            Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit,
-                            sed stet lorem sit clita duo justo magna dolore erat amet
+                            
                         </p>
                         <div class="row g-4 mb-4">
                             <div class="col-sm-6">
@@ -703,7 +693,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                         class="flex-shrink-0 display-5 text-primary mb-0"
                                         data-toggle="counter-up"
                                         >
-                                        15
+                                        30
                                     </h1>
                                     <div class="ps-4">
                                         <p class="mb-0">Years of</p>
@@ -736,7 +726,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <!-- About End -->
 
         <!-- Menu Start -->
-        <div class="container-xxl py-5">
+        <%-- <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h5
@@ -1310,7 +1300,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --%>
         <!-- Menu End -->
 
         <!-- Reservation Start -->
@@ -1539,13 +1529,33 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="team-item text-center rounded overflow-hidden">
+                            <div class="rounded-circle overflow-hidden m-4">
+                                <img class="img-fluid" src="img/team-4.jpg" alt="" />
+                            </div>
+                            <h5 class="mb-0">Full Name</h5>
+                            <small>Designation</small>
+                            <div class="d-flex justify-content-center mt-3">
+                                <a class="btn btn-square btn-primary mx-1" href=""
+                                   ><i class="fab fa-facebook-f"></i
+                                    ></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""
+                                   ><i class="fab fa-twitter"></i
+                                    ></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""
+                                   ><i class="fab fa-instagram"></i
+                                    ></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- Team End -->
 
         <!-- Testimonial Start -->
-        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <%-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container">
                 <div class="text-center">
                     <h5
@@ -1630,7 +1640,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --%>
         <!-- Testimonial End -->
 
         <!-- Footer Start -->

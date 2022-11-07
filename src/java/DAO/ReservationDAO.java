@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DBContext.DBContext;
+import Context.DBContext;
 import entity.Reservation;
 import entity.Reservation_details;
 import java.sql.Connection;

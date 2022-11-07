@@ -114,7 +114,7 @@
                             </li>
 
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="maps-google.html">
+                                <a class="sidebar-link" href="TableServlet?action=settable">
                                     <span class="align-middle">Table Setting</span>
                                 </a>
                             </li>

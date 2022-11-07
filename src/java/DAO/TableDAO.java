@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import DBContext.DBContext;
+import Context.DBContext;
 import entity.Table;
 import entity.TableType;
 

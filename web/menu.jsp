@@ -73,7 +73,7 @@
                                 <div class="dropdown-menu m-0">
                                     <a href="booking.jsp" class="dropdown-item">Booking</a>
                                     <a href="team.jsp" class="dropdown-item">Our Team</a>
-                                    <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
+                                    <%-- <a href="testimonial.jsp" class="dropdown-item">Testimonial</a> --%>
                                 </div>
                             </div>
                             <c:if test="${sessionScope.account.getRole_id() == 1}">
