@@ -140,6 +140,8 @@ public class LoginServlet extends HttpServlet {
 
             } else if (a.getRole_id() == 2) {
                 request.getRequestDispatcher("CashierHomePage.jsp").forward(request, response);
+            } else if (a.getRole_id() == 4) {
+                request.getRequestDispatcher("KitchenStaffHomePage.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }

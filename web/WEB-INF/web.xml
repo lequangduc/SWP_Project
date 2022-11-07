@@ -48,7 +48,7 @@
         <servlet-name>TableMapServlet</servlet-name>
         <servlet-class>controller.TableMapServlet</servlet-class>
     </servlet>
-    <servlet>
+     <servlet>
         <servlet-name>CancelBillController</servlet-name>
         <servlet-class>controller.CancelBillController</servlet-class>
     </servlet>
@@ -93,6 +93,7 @@
         <url-pattern>/ManageFood</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>CashierController</servlet-name>
         <url-pattern>/CashierController</url-pattern>
     </servlet-mapping>
