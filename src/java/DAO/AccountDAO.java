@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-import DBContext.DBContext;
+import Context.DBContext;
 import entity.Account;
 
 /**
@@ -205,8 +204,9 @@ public class AccountDAO implements Serializable {
         }
         return a;
     }
-    public Account getAccountByID(int iduser) throws SQLException{
-         Account a = null;
+
+    public Account getAccountByID(int iduser) throws SQLException {
+        Account a = null;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

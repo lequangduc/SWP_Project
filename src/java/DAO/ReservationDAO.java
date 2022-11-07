@@ -4,10 +4,21 @@
  */
 package DAO;
 
-
-import DBContext.DBContext;
+import Context.DBContext;
+import com.itextpdf.text.Anchor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import entity.Food;
 import entity.Reservation;
 import entity.Reservation_details;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ReservationDAO {
 
-    public static int nowReservation = 0;
+    public static int nowReservation = -1;
 
     public boolean addFoodType(Reservation re) throws SQLException {
         Connection conn = null;
@@ -93,7 +104,7 @@ public class ReservationDAO {
 
     }
 
-     public Long NextReservation(int id) throws SQLException {
+    public Long NextReservation(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -125,7 +136,7 @@ public class ReservationDAO {
                     e.printStackTrace();
                 }
 
-                long diff = d2.getTime() - d1.getTime();//as given
+                long diff = d2.getTime() - d1.getTime();// as given
 
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(diff) % 60;
@@ -142,6 +153,7 @@ public class ReservationDAO {
             Long s = Collections.max(listhours);
             int index = listhours.indexOf(s);
             nowReservation = idReservation.get(index);
+            System.out.println(nowReservation);
             return s;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -214,47 +226,13 @@ public class ReservationDAO {
     public Reservation getReservation(int id) throws SQLException {
 
         long seconds = NextReservation(id);
-        if (seconds != -10000) {
-            return null;
-        }
-        if (seconds < 1800) {
-            int reservation = nowReservation;
-            return getReservationByID(reservation);
-        }
-        return null;
-    }
-    public ArrayList<Reservation_details> getReservationDetailByID(int id) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        ArrayList<Reservation_details> list = new ArrayList<>();
-        try {
 
-            String sql = "select * from reservationDetail where reservation_id =?";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                int reservation_id = rs.getInt(1);
-                int food_id = rs.getInt(2);
-                int quantity = rs.getInt(3);
-                Reservation_details res = new Reservation_details(reservation_id,food_id,quantity);
-                list.add(res);
-            }
-            return list;
-
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            rs.close();
-            ps.close();
-            conn.close();
-        }
-        return null;
+        int reservation = nowReservation;
+        System.out.println(getReservationByID(reservation));
+        return getReservationByID(reservation);
 
     }
+
     public boolean addOrder(Reservation_details re) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -266,6 +244,147 @@ public class ReservationDAO {
             ps.setInt(1, re.getReservation_id());
             ps.setInt(2, re.getFood_id());
             ps.setInt(3, re.getQuantity());
+            rs = ps.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+
+            ps.close();
+            conn.close();
+        }
+        return false;
+    }
+
+    public ArrayList<Reservation_details> getListDetail(int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<Reservation_details> list = new ArrayList<>();
+        try {
+            String sql = "select * from reservationDetail where reservation_id = ?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int iddetail = rs.getInt(1);
+                int food_id = rs.getInt(2);
+                int quantity = rs.getInt(3);
+                Reservation_details res = new Reservation_details(iddetail, food_id, quantity);
+                list.add(res);
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            rs.close();
+            ps.close();
+            conn.close();
+        }
+        return null;
+    }
+
+    public float getTotalPrice(int id) throws SQLException {
+        ArrayList<Reservation_details> list = getListDetail(id);
+        float result = 0;
+        for (Reservation_details detail : list) {
+            Food fo = new FoodDAO().getFoodByID(detail.getFood_id());
+            result += detail.getQuantity() * fo.getPrice();
+        }
+        return result;
+    }
+
+    public boolean createBill(int id) throws SQLException {
+        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+
+        try {
+
+            // Tạo đối tượng PdfWriter
+            PdfWriter.getInstance(document, new FileOutputStream("D:\\".concat("Bills\\"+id + ".pdf")));
+
+            // Mở file để thực hiện ghi
+            document.open();
+
+            // Thêm nội dung sử dụng add function
+            Paragraph centerAlignedParagraph = new Paragraph("Restaurant");
+            centerAlignedParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(centerAlignedParagraph);
+            centerAlignedParagraph = new Paragraph("Khu do thi FPT - Nam ky khoi nghia");
+            centerAlignedParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(centerAlignedParagraph);
+            centerAlignedParagraph = new Paragraph("----------------------------------");
+            centerAlignedParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(centerAlignedParagraph);
+            Paragraph leftAlignedParagraph = new Paragraph("Bill ID: " + "RES00" + id);
+            leftAlignedParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(leftAlignedParagraph);
+            leftAlignedParagraph = new Paragraph("Time Reservation : " + getReservationByID(id).getDateReservation());
+            leftAlignedParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(leftAlignedParagraph);
+            centerAlignedParagraph = new Paragraph("------------------------------------------------------");
+            centerAlignedParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(centerAlignedParagraph);
+
+            PdfPTable table = new PdfPTable(3); // Create 2 columns in table.
+
+            // Create cells
+            PdfPCell cell1 = new PdfPCell(new Paragraph("Food"));
+            PdfPCell cell2 = new PdfPCell(new Paragraph("Quantity"));
+            PdfPCell cell3 = new PdfPCell(new Paragraph("Price"));
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            ArrayList<Reservation_details> list = getListDetail(id);
+            for (int i = 0; i < list.size(); i++) {
+                Food fo = new FoodDAO().getFoodByID(list.get(i).getFood_id());
+                PdfPCell cell4 = new PdfPCell(new Paragraph(fo.getName()));
+                PdfPCell cell5 = new PdfPCell(new Paragraph("" + list.get(i).getQuantity()));
+                PdfPCell cell6 = new PdfPCell(new Paragraph("" + fo.getPrice() * list.get(i).getQuantity()));
+                // Add cells in table
+                table.addCell(cell4);
+                table.addCell(cell5);
+                table.addCell(cell6);
+            }
+            // Add table in document
+            document.add(table);
+            Paragraph leftFooterAlignedParagraph = new Paragraph("Total Price : " + getTotalPrice(id));
+            leftFooterAlignedParagraph.setAlignment(Element.ALIGN_LEFT);
+            document.add(leftFooterAlignedParagraph);
+            Paragraph centerFooterAlignedParagraph = new Paragraph("----------------------------------");
+            centerFooterAlignedParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(centerFooterAlignedParagraph);
+            centerFooterAlignedParagraph = new Paragraph("Thanks you");
+            centerFooterAlignedParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(centerFooterAlignedParagraph);
+            centerFooterAlignedParagraph = new Paragraph("See you again");
+            centerFooterAlignedParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(centerFooterAlignedParagraph);
+
+            // Đóng File
+            document.close();
+            System.out.println("Write file succes!");
+            return true;
+        } catch (FileNotFoundException | DocumentException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean addGuestReservation(int id,int cusid) throws SQLException{
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int rs = 0;
+        String now = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        try {
+            String sql = "INSERT INTO reservation values(?,?,GETDATE())";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setInt(2, cusid);
+            
             rs = ps.executeUpdate();
             if (rs > 0) {
                 return true;

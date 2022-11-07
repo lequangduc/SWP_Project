@@ -4,7 +4,9 @@
  */
 package controller;
 
+import DAO.AccountDAO;
 import DAO.ReservationDAO;
+import entity.Account;
 import entity.Reservation_details;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,8 +64,32 @@ public class CashierController extends HttpServlet {
             throws ServletException, IOException {
         String setstatus = request.getParameter("setstatus");
         String id = request.getParameter("id");
-        String link = "./TableReservationDetails.jsp?id=" + id;
-        if (setstatus != null) {
+        String idbill = request.getParameter("idbill");
+        String action = request.getParameter("action");
+        if (action != null) {
+            if (action.equals("bill")) {
+                try {
+                    boolean boo = new ReservationDAO().createBill(Integer.parseInt(idbill));
+                    boolean bo = new ReservationDAO().setStatus("available", Integer.parseInt(id));
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(CashierController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else if(action.equals("addreservation")){
+                try {
+                    Account account = new AccountDAO().getAccount("guest", "guest");
+                    int tableid = Integer.parseInt(id);
+                    boolean b1 = new ReservationDAO().addGuestReservation(tableid,account.getAccount_id());
+                    boolean b2 = new ReservationDAO().setStatus("occupied",Integer.parseInt(id) );
+                } catch (SQLException ex) {
+                    Logger.getLogger(CashierController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            
+            }
+            request.getRequestDispatcher("./TableReservationDetails.jsp?id=".concat(id)).forward(request, response);
+        } else if (setstatus != null) {
+            String link = "./TableReservationDetails.jsp?id=" + id;
             int idstatus = Integer.parseInt(id);
             try {
                 boolean b = new ReservationDAO().setStatus(setstatus, idstatus);

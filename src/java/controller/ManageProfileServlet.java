@@ -96,8 +96,15 @@ public class ManageProfileServlet extends HttpServlet {
                 e.printStackTrace();
             }
             session.setAttribute("userLogin", name);
-            session.setAttribute("loggedAccount", a);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            Account d = (Account) session.getAttribute("loggedAccount");
+            if (d.getRole_id() == 1) {
+                request.getRequestDispatcher("AdminPage/index.jsp").forward(request, response);
+            } else if (d.getRole_id() == 2) {
+                request.getRequestDispatcher("CashierHomePage.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            // request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
