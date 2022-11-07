@@ -286,7 +286,6 @@ public class ReservationDAO {
         return false;
     }
 
-
     public ArrayList<Reservation_details> getListDetail(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -333,7 +332,7 @@ public class ReservationDAO {
         try {
 
             // Tạo đối tượng PdfWriter
-            PdfWriter.getInstance(document, new FileOutputStream("D:\\".concat("Bills\\"+id + ".pdf")));
+            PdfWriter.getInstance(document, new FileOutputStream("D:\\".concat("Bills\\" + id + ".pdf")));
 
             // Mở file để thực hiện ghi
             document.open();
@@ -402,7 +401,8 @@ public class ReservationDAO {
         }
         return false;
     }
-    public boolean addGuestReservation(int id,int cusid) throws SQLException{
+
+    public boolean addGuestReservation(int id, int cusid) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         int rs = 0;
@@ -413,7 +413,7 @@ public class ReservationDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.setInt(2, cusid);
-            
+
             rs = ps.executeUpdate();
             if (rs > 0) {
                 return true;
@@ -427,6 +427,7 @@ public class ReservationDAO {
         }
         return false;
     }
+
     public ArrayList<Reservation> getAllReservation() {
         String sql = "Select * from Reservation";
         Connection conn = null;
@@ -440,8 +441,7 @@ public class ReservationDAO {
             while (rs.next()) {
                 list.add(new Reservation(
                         rs.getInt(1), rs.getInt(2),
-                        rs.getInt(3), rs.getDate(4),
-                        rs.getInt(5)));
+                        rs.getInt(3), rs.getDate(4)));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
