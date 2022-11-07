@@ -62,7 +62,7 @@
             <div class="main">
                 <%@include file="../AdminPage/navbar.jsp" %>
                 <h2>UPDATE TYPE FOOD</h2>
-                <form action="${request.contextPath}/ARestaurantDemo/ManageFood" method="POST" >
+                <form action="${request.contextPath}/SWP_Project/ManageFood" method="POST" >
                     <c:set var="idtype" value="${param.idtype}"/>
                     <c:set var="foodtype" value="${db.getFoodTypeByID(idtype)}"/>
                     <input type="hidden" name="action" value="updatetypefood"/>

@@ -71,7 +71,7 @@
                             <div class="dropdown-menu m-0">
                                 <a href="booking.jsp" class="dropdown-item active">Booking</a>
                                 <a href="team.jsp" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
+                                <%-- <a href="testimonial.jsp" class="dropdown-item">Testimonial</a> --%>
                             </div>
                         </div>
                         <a href="contact.jsp" class="nav-item nav-link">Contact</a>
