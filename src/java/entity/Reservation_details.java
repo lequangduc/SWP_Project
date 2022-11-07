@@ -45,5 +45,5 @@ public class Reservation_details {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
+
 }

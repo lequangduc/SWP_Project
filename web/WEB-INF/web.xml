@@ -44,6 +44,10 @@
         <servlet-name>TableMapServlet</servlet-name>
         <servlet-class>controller.TableMapServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderDetailServlet</servlet-name>
+        <servlet-class>controller.OrderDetailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -81,13 +85,16 @@
         <url-pattern>/ManageFood</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>CashierController</servlet-name>
         <url-pattern>/CashierController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TableMapServlet</servlet-name>
         <url-pattern>/TableMapServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailServlet</servlet-name>
+        <url-pattern>/OrderDetailServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
