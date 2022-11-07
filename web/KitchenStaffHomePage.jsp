@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="DAO.TableDAO"%>
 <%@page import="DAO.ReservationDAO"%>
+<%@page import="DAO.FoodDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -57,48 +58,57 @@
     <body>
         <jsp:useBean id="db" class="DAO.TableDAO" />
         <jsp:useBean id="dao" class="DAO.ReservationDAO" />
+        <jsp:useBean id="fdao" class="DAO.FoodDAO" />
         <%! int tableid = 0;
-                                                                                                 %>
+                                                                                                                                                                                                 %>
         <div class="wrapper">
             <%@include file="./navigation.jsp" %>
 
             <div class="main">
                 <%@include file="./navbar.jsp" %>
-                <div class="parts">
+                <div class="container">
                     <c:forEach var="tb" items="${db.allTable}">
                         <c:if test="${tb.status == 'occupied'}">
-                            <p>
+                            <div>
 
-                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#${tb.tableID}" aria-expanded="false" aria-controls="collapseExample">
-                                    Table ${tb.tableID}
-                                </button>
-                            </p>
-                            <div class="collapse" id="${tb.tableID}">
-                                <div class="card card-body">
-                                    <c:set var="nowreservation" value="${dao.getReservation(tb.tableID)}"/>
-                                    <c:set var="order" value="${dao.getListDetail(nowreservation.reservation_id)}"/>
-                                    <c:forEach var="eachorder" items="${order}">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Number</th>
-                                                    <th>Food</th>
-                                                    <th>Quantity</th>
-                                                </tr>
-                                            </thead>
+                                <c:set var="nowreservation" value="${dao.getReservation(tb.tableID)}"/>
 
-                                            <tbody>
+
+
+                                <c:set var="order" value="${dao.getListDetail(nowreservation.reservation_id)}"/>
+                                <c:set var="c" value="0"/>
+
+                                <c:if test="${not empty order}">
+                                    <c:set var="resid" value="${nowreservation.reservation_id}"/>
+                                    <c:out value="Reservation ${resid}- Table ${tb.tableID}"/>
+                                    <c:set var="order" value="${dao.getListDetail(resid)}"/>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Number</th>
+                                                <th>Food</th>
+                                                <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <c:forEach var="eachorder" items="${order}">
                                                 <c:set var="c" value="${c+1}"/>
+                                                <c:set var="food" value="${fdao.getFoodByID(eachorder.food_id)}"/>
                                                 <tr>
                                                     <td>${c}</td>
-                                                    <td>${fooddao.getFoodByID(eachorder.food_id).name}</td>
+                                                    <td>${food.getName()}</td>
                                                     <td>${eachorder.quantity}</td>
                                                 </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
 
-                                            </tbody>
-                                        </table>
-                                    </c:forEach>
-                                </div>
+
+                                </c:if>
+
+
                             </div>
                         </c:if>
 
@@ -106,9 +116,9 @@
                 </div>
                 <!-- Button trigger modal -->
 
-                    <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
-                        : request.getAttribute("errMessage")%></p>
-                <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
+                <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
+                            : request.getAttribute("errMessage")%></p>
+                    <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
                             : request.getAttribute("Message")%></p>  
                     <%@include file="./footer.jsp"%>
             </div>

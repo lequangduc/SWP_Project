@@ -82,7 +82,7 @@
                             <th>Type</th>
                             <th>Description</th>
                             <th>Action</th>
-                            <th>Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -95,8 +95,8 @@
                                     <td>${pt.price}</td>
                                     <td>${db.getFoodTypeName(pt.foodtype_id)}</td>
                                     <td>${pt.foodDescription}</td>
-                                    <td><button><a href="${request.contextPath}/SWP_Project/AdminPage/UpdateFoodPage.jsp?idfood=${pt.food_id}">Update</a></button></td>
-                                    <td><button><a href="${request.contextPath}/SWP_Project/ManageFood?type=delete&id=${pt.food_id}">Delete</a></button></td>
+                                    <td><button class="btn btn-info"><a href="${request.contextPath}/SWP_Project/AdminPage/UpdateFoodPage.jsp?idfood=${pt.food_id}">Update</a></button></td>
+                                    
                                 </tr>
                             </c:forEach>
                         </c:if>
@@ -107,8 +107,8 @@
                                     <td>${pt.price}</td>
                                     <td>${db.getFoodTypeName(pt.foodtype_id)}</td>
                                     <td>${pt.foodDescription}</td>
-                                    <td><button><a href="${request.contextPath}/SWP_Project/UpdateFoodPage.jsp?idfood=${pt.food_id}">Update</a></button></td>
-                                    <td><button><a href="${request.contextPath}/SWP_Project/ManageFood?type=delete&id=${pt.food_id}">Delete</a></button></td>
+                                    <td><button class="btn btn-dark"><a href="${request.contextPath}/SWP_Project/UpdateFoodPage.jsp?idfood=${pt.food_id}">Update</a></button></td>
+                                    
                                 </tr>
                             </c:forEach>
                         </c:if>

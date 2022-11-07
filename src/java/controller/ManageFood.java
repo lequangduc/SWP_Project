@@ -95,20 +95,7 @@ public class ManageFood extends HttpServlet {
                 
             }
             
-            if (type.equals("delete")) {
-                boolean status = false;
-                try {
-                    status = pdao.deleteFood(Integer.parseInt(id));
-                } catch (SQLException ex) {
-                    Logger.getLogger(ManageFood.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if (status) {
-                    request.setAttribute("Status", "Delete Successful");
-                } else {
-                    request.setAttribute("Status", "Delete Failed");
-                }
-                
-            }
+            
             
             if ("all".equals(type)) {
                 request.setAttribute("type", null);
