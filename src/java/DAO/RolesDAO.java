@@ -1,5 +1,6 @@
 package DAO;
 
+import DBContext.DBContext;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Context.DBContext;
 import entity.Role;
 
 public class RolesDAO implements Serializable {

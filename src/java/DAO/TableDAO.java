@@ -1,11 +1,11 @@
 package DAO;
 
+import DBContext.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import Context.DBContext;
 import entity.Table;
 import entity.TableType;
 
