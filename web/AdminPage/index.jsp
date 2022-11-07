@@ -129,7 +129,6 @@
                                                 <th>reservation_id</th>
                                                 <th>customer_id</th>
                                                 <th>Date Reservation</th>
-                                                <th>number of people</th>
 
                                             </tr>
                                         </thead>
@@ -141,7 +140,6 @@
                                                 <td><%=r.getReservation_id()%></td>
                                                 <td><%=r.getCustomer_id()%></td>
                                                 <td><%=r.getDateReservation()%></td>
-                                                <td><%=r.getNoPeople()%></td>
                                             </tr>
                                             <%}%>
                                         </tbody>
