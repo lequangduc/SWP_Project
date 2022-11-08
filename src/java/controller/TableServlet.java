@@ -72,7 +72,7 @@ public class TableServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action.equals("managetablelist")) {
-            tableDetails = getTableList(tables, tableTypes);
+            tableDetails = getTableList(new TableDAO().getAllTable(), tableTypes);
             request.setAttribute("tableTypeName", tableTypeNames);
             request.setAttribute("tableList", tableDetails);
             request.getRequestDispatcher("/AdminPage/tablelist.jsp").forward(request, response);
@@ -85,7 +85,7 @@ public class TableServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-            tableDetails = getTableList(tables, tableTypes);
+            tableDetails = getTableList(new TableDAO().getAllTable(), tableTypes);
             request.setAttribute("tableList", tableDetails);
             request.getRequestDispatcher("/AdminPage/tablesetting.jsp").forward(request, response);
 
@@ -110,7 +110,7 @@ public class TableServlet extends HttpServlet {
             String type = request.getParameter("type_search");
             ArrayList<TableDetail> tableDetailsSearch = new ArrayList<>();
             if (status.equals("all") && type.equals("all")) {
-                tableDetailsSearch = getTableList(tables, tableTypes);
+                tableDetailsSearch = getTableList(new TableDAO().getAllTable(), tableTypes);
             } else if (!status.equals("all") && type.equals("all")) {
                 for (TableDetail tableDetail : tableDetails) {
                     if (tableDetail.getStatus().equals(status)) {

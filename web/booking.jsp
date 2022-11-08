@@ -151,15 +151,15 @@
                                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
-                            <div class="modal-body">
+                            <div class="modal-body" style="padding:3px;">
                                 <table id="table_id" class="stripe hover order-column">
                                     <thead>
                                         <tr>
-                                            <th>Table</th>
                                             <th>Reservation ID</th>
                                             <th>Table Number</th>
                                             <th>Date</th>
-                                            <th></th>
+                                            <th>Order</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
 
@@ -174,10 +174,14 @@
 
                                                 for (int i = 0; i < list.size(); i++) {%>
                                         <tr id="clear">
-                                            <td><%=acc.getAccount_id()%></td>
                                             <td id="rid"><%=list.get(i).getReservation_id()%></td>
                                             <td id="tid"><%=list.get(i).getTable_id()%></td>
                                             <td><%=list.get(i).getDateReservation()%></td>
+                                            <td >
+                                                <a href="customer-order.jsp?tableOrderId=<%=list.get(i).getTable_id()%>" class="btn btn-primary" id="add-order">
+                                                    <i class="bi bi-alarm-fill"></i>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <button class="btn btn-primary" id="remove">
                                                     <i class="bi bi-x"></i>

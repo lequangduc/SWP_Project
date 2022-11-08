@@ -71,7 +71,6 @@ public class BookingServlet extends HttpServlet {
             if (acc != null) {
                 // Lấy thông tin trên form
                 String name = request.getParameter("name");
-                int noPeople = Integer.parseInt(request.getParameter("people"));
                 String tableID = request.getParameter("table");
 
                 // Chuyển đổi string date có dạng ở dưới thành date
@@ -89,7 +88,7 @@ public class BookingServlet extends HttpServlet {
                     Reservation res = new Reservation(
                             autoIncreaseID(dao.getAllReservation()), Integer.parseInt(tableID),
                             acc.getAccount_id(),
-                            sqlDate, noPeople);
+                            sqlDate);
                     System.out.println(res.toString());
                     // Check thử việc thêm vào có bị lỗi ko
                     if (dao.checkAddFoodType(res)) {
