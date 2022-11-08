@@ -50,10 +50,10 @@
                             <div class="form-group">
                                 <label for="product type">Product type</label>
                                 <select name="type">
-                                        <option value="${db.getFoodTypeName(food.foodtype_id)}">${db.getFoodTypeName(food.foodtype_id)}</option>
+                                        <option selected="selected" value="${db.getFoodTypeName(food.foodtype_id)}">${db.getFoodTypeName(food.foodtype_id)}</option>
                                         <c:forEach var="pt" items="${db.listAllTypeName}">
                                             <c:if test="${db.getFoodTypeId(pt)!= food.foodtype_id}">
-                                            <option value="${pt}">${pt}</option>
+                                            <option value="${pt.getFoodtypename()}">${pt.getFoodtypename()}</option>
                                             </c:if>
                                         </c:forEach> 
                                 </select>
