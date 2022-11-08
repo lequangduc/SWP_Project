@@ -59,8 +59,7 @@
         <jsp:useBean id="db" class="DAO.TableDAO" />
         <jsp:useBean id="dao" class="DAO.ReservationDAO" />
         <jsp:useBean id="fdao" class="DAO.FoodDAO" />
-        <%! int tableid = 0;
-                                                                                                                                                                                                 %>
+        <c:set var="count" value="0"/>
         <div class="wrapper">
             <%@include file="./navigation.jsp" %>
 
@@ -68,7 +67,7 @@
                 <%@include file="./navbar.jsp" %>
                 <div class="container">
                     <c:forEach var="tb" items="${db.allTable}">
-                        <c:if test="${tb.status == 'reserved'}">
+                        <c:if test="${tb.status == 'occupied'}">
                             <div>
 
                                 <c:set var="nowreservation" value="${dao.getReservation(tb.tableID)}"/>
@@ -88,10 +87,12 @@
                                                 <th>Number</th>
                                                 <th>Food</th>
                                                 <th>Quantity</th>
+                                                <th>Completed</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
+
 
                                             <c:forEach var="eachorder" items="${order}">
                                                 <c:set var="c" value="${c+1}"/>
@@ -100,19 +101,28 @@
                                                     <td>${c}</td>
                                                     <td>${food.getName()}</td>
                                                     <td>${eachorder.quantity}</td>
+                                                    <td><input required type="checkbox"></td>
                                                 </tr>
+                                                
                                             </c:forEach>
                                         </tbody>
+                                        <button class="btn btn-info"><a href="KitchenStaffController?action=kitchenaction&setstatus=reserved&id=${tb.tableID}">Reserved</a></button>
+
                                     </table>
 
 
+                                    <c:set var="count" value="${count+1}"/>
                                 </c:if>
+
 
 
                             </div>
                         </c:if>
 
                     </c:forEach>
+                    <c:if test="${count == 0}">
+                        <h3 style="text-align: center">NOT HAVE ANY ORDER NOW</h3>
+                    </c:if>
                 </div>
                 <!-- Button trigger modal -->
 

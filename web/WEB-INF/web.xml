@@ -60,6 +60,10 @@
         <servlet-name>CustomerOrderServlet</servlet-name>
         <servlet-class>controller.CustomerOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>KitchenStaffController</servlet-name>
+        <servlet-class>controller.KitchenStaffController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>CustomerOrderServlet</servlet-name>
         <url-pattern>/CustomerOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>KitchenStaffController</servlet-name>
+        <url-pattern>/KitchenStaffController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

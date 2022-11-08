@@ -52,6 +52,10 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            a{
+                color: #fff;
+                
+            }
         </style>
 
 
@@ -178,7 +182,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="quantity">Quantity</label>
-                                                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity .. ">
+                                                        <input required type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity .. ">
                                                     </div>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     <input type="submit" class="btn btn-primary" value="Save changes"/>

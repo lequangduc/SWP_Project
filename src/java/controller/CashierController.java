@@ -66,6 +66,7 @@ public class CashierController extends HttpServlet {
         String id = request.getParameter("id");
         String idbill = request.getParameter("idbill");
         String action = request.getParameter("action");
+        
         if (action != null) {
             if (action.equals("bill")) {
                 try {
@@ -88,7 +89,7 @@ public class CashierController extends HttpServlet {
             
             }
             request.getRequestDispatcher("./TableReservationDetails.jsp?id=".concat(id)).forward(request, response);
-        } else if (setstatus != null) {
+        }else if (setstatus != null) {
             String link = "./TableReservationDetails.jsp?id=" + id;
             int idstatus = Integer.parseInt(id);
             try {
