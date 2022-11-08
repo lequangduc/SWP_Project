@@ -1,17 +1,9 @@
-<%-- 
-    Document   : UpdateFoodPage
-    Created on : Oct 28, 2022, 9:12:54 AM
-    Author     : admin
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.FoodDAO"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Product</title>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,39 +11,20 @@
         <meta name="author" content="AdminKit">
         <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-        <!--        <link rel="preconnect" href="https://fonts.gstatic.com">-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
         <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
         <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
+        <title>AdminKit Demo - Bootstrap 5 Admin Template</title>
 
-        <style>
-            table tr td{
-                padding: 20px .625em .625em .625em;   
-
-            }
-            table tr th{
-                padding: 20px .625em .625em .625em;   
-                text-align: center;
-            }
-            table{
-                margin-right: auto;
-                margin-left: auto;
-            }
-            input{
-                padding:10px 20px 10px 20px;
-            }
-            h2{
-                text-align: center;
-            }
-            input{width: 500px;text-align: center}
-
-        </style>
-        <link href="./css/app.css" rel="stylesheet"/>
-        <link href="./css/mycss.css" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+        <link href="./css/app.css" rel="stylesheet">
+        <link href="./css/mycss.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     </head>
+
+
     <body>
         <jsp:useBean id="db" class="DAO.FoodDAO" />
         <div class="wrapper">
@@ -59,64 +32,54 @@
 
             <div class="main">
                 <%@include file="../AdminPage/navbar.jsp" %>
-                <h2>UPDATE FOOD</h2>
-                <form action="${request.contextPath}/SWP_Project/ManageFood" method="POST" >
+                <main class="content">
+                    <div class="container">
+                        <div class="card-title text-center mb-5">Update food</div>
+                        <form action="${request.contextPath}/SWP_Project/ManageFood" method="POST" >
                     <c:set var="idfood" value="${param.idfood}"/>
                     <c:set var="food" value="${db.getFoodByID(idfood)}"/>
                     <input type="hidden" name="action" value="updatefood"/>
-                    <table border="0">
-
-                        <tbody>
-                            <tr>
-                                <td>Product ID : </td>
-                                <td><input type="text" name="idfood" readonly value="${food.food_id}"></td>
-                            </tr>
-                            <tr>
-                                <td>Product Name : </td>
-                                <td><input type="text" name="name" value="${food.name}"></td>
-                            </tr>
-                            <tr>
-                                <td>Product Type : </td>
-                                <td>
-                                    <select name="type">
+                            <div class="form-group">
+                                <label for="idfood">ID Food</label>
+                                <input type="text" class="form-control" id="idfood" name="idfood" readonly value="${food.food_id}">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="${food.name}">
+                            </div>
+                            <div class="form-group">
+                                <label for="product type">Product type</label>
+                                <select name="type">
                                         <option value="${db.getFoodTypeName(food.foodtype_id)}">${db.getFoodTypeName(food.foodtype_id)}</option>
                                         <c:forEach var="pt" items="${db.listAllTypeName}">
                                             <c:if test="${db.getFoodTypeId(pt)!= food.foodtype_id}">
                                             <option value="${pt}">${pt}</option>
                                             </c:if>
                                         </c:forEach> 
-                                    </select>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Product Price : </td>
-                                <td><input type="text" name="price" value="${food.price}"></td>
-                            </tr>
-                            <tr>
-                                <td>Product Info : </td>
-                                <td><input type="text" name="info" value="${food.foodDescription}"></td>
-                            </tr>
-                            <tr>
-                                <td>Product Image : </td>
-                                <td><input type="text" name="image" value="${food.foodImage}"></td>
-
-                            </tr>
-
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" name="action" value="Update"></td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" min="0" step=1000 class="form-control" id="price" name="price" placeholder="Enter price" value="${food.price}">
+                            </div>
+                            <div class="form-group">
+                                <label for="product info">Product info</label>
+                                <textarea class="form-control" id="info" name="info" rows="3" >${food.foodDescription}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="text" class="form-control-file" id="image" name="image" value="${food.foodImage}">
+                            </div>
+                            <div class="form-group">
+                            <input type="submit" name="action" value="Update">
+                            </div>
                 </form>
-                    <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
+                            <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
                     : request.getAttribute("errMessage")%></p>
                 <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
                     : request.getAttribute("Message")%></p>  
-                    <%@include file="footer.jsp"%>
+                    </div>
+                </main>
             </div>
 
         </div>
