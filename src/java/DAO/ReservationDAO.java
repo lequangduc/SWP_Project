@@ -218,17 +218,18 @@ public class ReservationDAO {
 
     }
 
-    public Reservation getReservationByID(int id) throws SQLException {
+    public Reservation getReservationByID(int id,int tableid) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
 
-            String sql = "SELECT * FROM reservation where reservation_id = ?";
+            String sql = "SELECT * FROM reservation where reservation_id = ? and table_id=?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
+            ps.setInt(2, tableid);
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -250,14 +251,14 @@ public class ReservationDAO {
         return null;
 
     }
-
+//id cua ban, 
     public Reservation getReservation(int id) throws SQLException {
 
         long seconds = NextReservation(id);
 
         int reservation = nowReservation;
-        System.out.println(getReservationByID(reservation));
-        return getReservationByID(reservation);
+        System.out.println(getReservationByID(reservation,id));
+        return getReservationByID(reservation,id);
 
     }
 
@@ -326,7 +327,7 @@ public class ReservationDAO {
         return result;
     }
 
-    public boolean createBill(int id) throws SQLException {
+    public boolean createBill(int id,int tableid) throws SQLException {
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 
         try {
@@ -350,7 +351,7 @@ public class ReservationDAO {
             Paragraph leftAlignedParagraph = new Paragraph("Bill ID: " + "RES00" + id);
             leftAlignedParagraph.setAlignment(Element.ALIGN_LEFT);
             document.add(leftAlignedParagraph);
-            leftAlignedParagraph = new Paragraph("Time Reservation : " + getReservationByID(id).getDateReservation());
+            leftAlignedParagraph = new Paragraph("Time Reservation : " + getReservationByID(id,tableid).getDateReservation());
             leftAlignedParagraph.setAlignment(Element.ALIGN_LEFT);
             document.add(leftAlignedParagraph);
             centerAlignedParagraph = new Paragraph("------------------------------------------------------");

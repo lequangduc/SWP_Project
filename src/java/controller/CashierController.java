@@ -69,7 +69,7 @@ public class CashierController extends HttpServlet {
         if (action != null) {
             if (action.equals("bill")) {
                 try {
-                    boolean boo = new ReservationDAO().createBill(Integer.parseInt(idbill));
+                    boolean boo = new ReservationDAO().createBill(Integer.parseInt(idbill),Integer.parseInt(id));
                     boolean bo = new ReservationDAO().setStatus("available", Integer.parseInt(id));
 
                 } catch (SQLException ex) {
