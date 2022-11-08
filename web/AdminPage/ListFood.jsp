@@ -1,19 +1,11 @@
-<%-- 
-    Document   : ListFood
-    Created on : Oct 25, 2022, 10:35:33 AM
-    Author     : admin
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.FoodDAO"%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,110 +13,121 @@
         <meta name="author" content="AdminKit">
         <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-        <!--        <link rel="preconnect" href="https://fonts.gstatic.com">-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
         <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
         <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
+        <title>AdminKit Demo - Bootstrap 5 Admin Template</title>
 
-        <style>
-            table tr td{
-                padding: 20px .625em .625em .625em;   
-
-            }
-            table tr th{
-                padding: 20px .625em .625em .625em;   
-                text-align: center;
-            }
-            table{
-                margin-right: auto;
-                margin-left: auto;
-            }
-            input{
-                padding:10px 20px 10px 20px;
-            }
-            h2{
-                text-align: center;
-            }
-            input{width: 500px;text-align: center}
-            .row-content{
-                display: flex;
-            }
-        </style>
-        <link href="./css/app.css" rel="stylesheet"/>
-        <link href="./css/mycss.css" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+        <link href="./css/app.css" rel="stylesheet">
+        <link href="./css/mycss.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     </head>
+
     <body>
-        <jsp:useBean id="db" class="DAO.FoodDAO" />
         <div class="wrapper">
-            <%@include file="../AdminPage/navigation.jsp" %>
+            <%@include file="navigation.jsp" %>
 
             <div class="main">
-                <%@include file="../AdminPage/navbar.jsp" %>
-                <h2>LIST ALL FOOD</h2>
-                <div class="row-content">
-                    <button><a href="${request.contextPath}/SWP_Project/ManageFood?type=all">All Food</a></button>
-                    <c:forEach var="item" items="${db.listAllTypeName}">
-                        <button><a href="${request.contextPath}/SWP_Project/ManageFood?type=${item.foodtypename}">${item.foodtypename}</a></button>
-                    </c:forEach>
-                    
-                    
-                </div>
-                     <p style="color:red; display: block;"><%=(request.getAttribute("Status") == null) ? ""
-                            : request.getAttribute("Status")%></p> 
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Action</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:set var="type" value="${requestScope.type}"/>
-                        
-                        <c:if test="${type == null || type == ''}">
-                            <c:forEach var="pt" items="${db.listAllFood}">
-                                <tr>
-                                    <td>${pt.name}</td>
-                                    <td>${pt.price}</td>
-                                    <td>${db.getFoodTypeName(pt.foodtype_id)}</td>
-                                    <td>${pt.foodDescription}</td>
-                                    <td><button class="btn btn-info"><a href="${request.contextPath}/SWP_Project/AdminPage/UpdateFoodPage.jsp?idfood=${pt.food_id}">Update</a></button></td>
-                                    
-                                </tr>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${type != null}">
-                            <c:forEach var="pt" items="${db.getListFoodByType(type)}">
-                                <tr>
-                                    <td>${pt.name}</td>
-                                    <td>${pt.price}</td>
-                                    <td>${db.getFoodTypeName(pt.foodtype_id)}</td>
-                                    <td>${pt.foodDescription}</td>
-                                    <td><button class="btn btn-dark"><a href="${request.contextPath}/SWP_Project/UpdateFoodPage.jsp?idfood=${pt.food_id}">Update</a></button></td>
-                                    
-                                </tr>
-                            </c:forEach>
-                        </c:if>
+                <%@include file="navbar.jsp" %>
 
-                    </tbody>
-                </table>
+                <main class="content">
+                    <jsp:useBean id="db" class="DAO.FoodDAO" />
 
-                    <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
-                        : request.getAttribute("errMessage")%></p>
-                <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
-                            : request.getAttribute("Message")%></p>  
-                    <%@include file="footer.jsp"%>
+                    <div class="container">
+                        <div class="card-title text-center mb-5">List all food</div>
+
+                        <div class="row-content">
+                            <button class="btn btn-secondary"><a style="text-decoration:none; color:white" href="${request.contextPath}/SWP_Project/ManageFood?type=all">All Food</a></button>
+                            <c:forEach var="item" items="${db.listAllTypeName}">
+                                <button class="btn btn-secondary"><a style="text-decoration:none; color:white" href="${request.contextPath}/SWP_Project/ManageFood?type=${item.foodtypename}">${item.foodtypename}</a></button>
+                                </c:forEach>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="table-responsive-sm">
+                                <table class="table table-hover">
+                                    <thead class="thead-dark" >
+                                        <tr >
+                                            <th >Name</th>
+                                            <th >Price</th>
+                                            <th >Type</th>
+                                            <th >Description</th>
+                                            <th >Action</th>
+                                        </tr>
+                                    <tbody class="tbody-striped" >
+                                        <c:set var="type" value="${requestScope.type}"/>
+
+                                        <c:if test="${type == null || type == ''}">
+                                            <c:forEach var="pt" items="${db.listAllFood}">
+                                                <tr>
+                                                    <td>${pt.name}</td>
+                                                    <td>${pt.price}</td>
+                                                    <td>${db.getFoodTypeName(pt.foodtype_id)}</td>
+                                                    <td>${pt.foodDescription}</td>
+                                                    <td><button class="btn btn-info"><a style="text-decoration:none; color:white" href="${request.contextPath}/SWP_Project/AdminPage/UpdateFoodPage.jsp?idfood=${pt.food_id}">Update</a></button></td>
+
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${type != null}">
+                                            <c:forEach var="pt" items="${db.getListFoodByType(type)}">
+                                                <tr>
+                                                    <td>${pt.name}</td>
+                                                    <td>${pt.price}</td>
+                                                    <td>${db.getFoodTypeName(pt.foodtype_id)}</td>
+                                                    <td>${pt.foodDescription}</td>
+                                                    <td><button class="btn btn-dark"><a style="text-decoration:none; color:white" href="${request.contextPath}/SWP_Project/UpdateFoodPage.jsp?idfood=${pt.food_id}">Update</a></button></td>
+
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
+                                    </tbody>
+                                    </thead>
+                                </table>
+                                    <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
+                                : request.getAttribute("errMessage")%></p>
+                                    <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
+                        : request.getAttribute("Message")%></p>  
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row text-muted">
+                            <div class="col-6 text-start">
+                                <p class="mb-0">
+                                    <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin Template</strong></a>								&copy;
+                                </p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
-
         </div>
-        <script src="../js/app.js"></script>
+
+        <script src="js/app.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>

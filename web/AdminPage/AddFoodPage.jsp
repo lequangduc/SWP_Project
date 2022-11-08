@@ -1,18 +1,9 @@
-<%-- 
-    Document   : AddFood
-    Created on : Oct 18, 2022, 9:09:36 AM
-    Author     : admin
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.FoodDAO"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Product</title>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,39 +11,20 @@
         <meta name="author" content="AdminKit">
         <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-        <!--        <link rel="preconnect" href="https://fonts.gstatic.com">-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
         <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
         <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
+        <title>AdminKit Demo - Bootstrap 5 Admin Template</title>
 
-        <style>
-            table tr td{
-                padding: 20px .625em .625em .625em;   
-
-            }
-            table tr th{
-                padding: 20px .625em .625em .625em;   
-                text-align: center;
-            }
-            table{
-                margin-right: auto;
-                margin-left: auto;
-            }
-            input{
-                padding:10px 20px 10px 20px;
-            }
-            h2{
-                text-align: center;
-            }
-            input{width: 500px;text-align: center}
-
-        </style>
-        <link href="./css/app.css" rel="stylesheet"/>
-        <link href="./css/mycss.css" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+        <link href="./css/app.css" rel="stylesheet">
+        <link href="./css/mycss.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     </head>
+
+
     <body>
         <jsp:useBean id="db" class="DAO.FoodDAO" />
         <div class="wrapper">
@@ -60,55 +32,44 @@
 
             <div class="main">
                 <%@include file="../AdminPage/navbar.jsp" %>
-                <h2>ADD NEW PRODUCT</h2>
-                <form action="${request.contextPath}/SWP_Project/AddFoodServlet" method="POST" >
-
-                    <table border="0">
-
-                        <tbody>
-                            <tr>
-                                <td>Product Name : </td>
-                                <td><input type="text" name="name"></td>
-                            </tr>
-                            <tr>
-                                <td>Product Type : </td>
-                                <td>
-                                    <select name="type">
-                                        <c:forEach var="pt" items="${db.listAllTypeName}">
-                                            <option value="${pt.foodtypename}">${pt.foodtypename}</option>
-                                        </c:forEach> 
-                                    </select>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Product Price : </td>
-                                <td><input type="text" name="price"></td>
-                            </tr>
-                            <tr>
-                                <td>Product Info : </td>
-                                <td><input type="text" name="info"></td>
-                            </tr>
-                            <tr>
-                                <td>Product Image : </td>
-                                <td><input type="text" name="image"></td>
-
-                            </tr>
-
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" name="action" value="ADD"></td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </form>
-                    <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
-                    : request.getAttribute("errMessage")%></p>
-                <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
-                    : request.getAttribute("Message")%></p>  
-                    <%@include file="footer.jsp"%>
+                <main class="content">
+                    <div class="container">
+                        <div class="card-title text-center mb-5">Add new food</div>
+                        <form action="${request.contextPath}/SWP_Project/AddFoodServlet" method="POST" >
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
+                            </div>
+                            <div class="form-group">
+                                <label for="product type">Product type</label>
+                                <select name="type">
+                                    <c:forEach var="pt" items="${db.listAllTypeName}">
+                                        <option value="${pt.foodtypename}">${pt.foodtypename}</option>
+                                    </c:forEach> 
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" min="0" step=1000 class="form-control" id="price" name="price" placeholder="Enter price">
+                            </div>
+                            <div class="form-group">
+                                <label for="product info">Product info</label>
+                                <textarea class="form-control" id="info" name="info" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="text" class="form-control-file" id="image" name="image">
+                            </div>
+                            <div class="form-group">
+                            <input type="submit" name="action" value="ADD">
+                            </div>
+                        </form>
+                            <p style="color:red; display: block;"><%=(request.getAttribute("errMessage") == null) ? ""
+                            : request.getAttribute("errMessage")%></p>
+                            <p style="color:red; display: block;"><%=(request.getAttribute("Message") == null) ? ""
+                        : request.getAttribute("Message")%></p>  
+                    </div>
+                </main>
             </div>
 
         </div>
