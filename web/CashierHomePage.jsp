@@ -59,8 +59,7 @@
     <body>
         <jsp:useBean id="db" class="DAO.TableDAO" />
         <jsp:useBean id="dao" class="DAO.ReservationDAO" />
-        <%! int tableid = 0;
-                                                 %>
+      
         <div class="wrapper">
             <%@include file="./navigation.jsp" %>
 

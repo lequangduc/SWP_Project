@@ -151,7 +151,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <%-- <i class="fa fa-user ml-3"></i>   <%=loginUser%>
                     <a class="ml-3" href="LoginServlet"><i class="fa fa-times"> Logout</i></a> --%>
 
-                            <li class="nav-item dropdown">
+                            <li style="list-style:none;" class="nav-item dropdown">
                                 <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
                                     <i class="align-middle" data-feather="settings"></i>
                                 </a>
@@ -769,7 +769,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                         class="flex-shrink-0 display-5 text-primary mb-0"
                                         data-toggle="counter-up"
                                         >
-                                        {availableTables}
+                                        ${availableTables}
                                     </h1>
                                     <div class="ps-4">
                                         <p class="mb-0">Available</p>

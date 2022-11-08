@@ -68,7 +68,7 @@
                 <%@include file="./navbar.jsp" %>
                 <div class="container">
                     <c:forEach var="tb" items="${db.allTable}">
-                        <c:if test="${tb.status == 'occupied'}">
+                        <c:if test="${tb.status == 'reserved'}">
                             <div>
 
                                 <c:set var="nowreservation" value="${dao.getReservation(tb.tableID)}"/>
